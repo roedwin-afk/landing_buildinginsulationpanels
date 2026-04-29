@@ -9,9 +9,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build:prod": "cross-env SITE=https://landing.mequipo.com BASE=/landings/floorinsulationpanels/ astro build"
   },
   "dependencies": {
-    "astro": "^6.1.10"
+    "@astrojs/sitemap": "^3.7.2",
+    "astro": "^6.1.10",
+    "cross-env": "^10.1.0"
   }
 }
