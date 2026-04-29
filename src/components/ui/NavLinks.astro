@@ -10,14 +10,15 @@ interface Props {
 
 const { t, lang, variant = "navbar" } = Astro.props;
 
-const base = lang === "es" ? "/es" : "";
-const alternatePath = lang === "es" ? "/" : "/es/";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const langPrefix = lang === "es" ? `${base}/es` : base;
+const alternatePath = lang === "es" ? `${base}/` : `${base}/es/`;
 ---
 
 <ul class={`nav-links nav-links--${variant}`}>
-  <li><a href={`${base}/#solutions`}>{t.nav.solutions}</a></li>
-  <li><a href={`${base}/#benefits`}>{t.nav.performance}</a></li>
-  <li><a href={`${base}/#specs`}>{t.nav.techSpecs}</a></li>
+  <li><a href={`${langPrefix}/#solutions`}>{t.nav.solutions}</a></li>
+  <li><a href={`${langPrefix}/#benefits`}>{t.nav.performance}</a></li>
+  <li><a href={`${langPrefix}/#specs`}>{t.nav.techSpecs}</a></li>
   <li class="nav-links__lang">
     <a href={alternatePath} class="lang-switcher">
       {lang === "es" ? "EN" : "ES"}
