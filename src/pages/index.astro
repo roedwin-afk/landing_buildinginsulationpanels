@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getLang, useTranslations } from "../i18n/utils";
 import Navbar from "../components/layout/Navbar.astro";
 import Footer from "../components/layout/Footer.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
 
 const lang = getLang(Astro.url, import.meta.env.BASE_URL);
 const t = useTranslations(lang);
@@ -10,6 +11,8 @@ const t = useTranslations(lang);
 
 <BaseLayout t={t} lang={lang}>
 	<Navbar t={t} lang={lang} />
+
+	<HeroSection t={t} lang={lang} />
 
 	<h1 style="padding: 4rem; text-align: center;">🚧 En construcción</h1>
 
