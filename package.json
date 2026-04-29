@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "build:prod": "cross-env SITE=https://landing.mequipo.com BASE=/landings/floorinsulationpanels/ astro build"
+    "build:prod": "cross-env SITE=https://landing.mequipo.com BASE=/landings/buildinginsulationpanels/ astro build"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
