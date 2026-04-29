@@ -1,0 +1,109 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+  variant?: "navbar" | "footer" | "mobile";
+}
+
+const { t, lang, variant = "navbar" } = Astro.props;
+
+const base = lang === "es" ? "/es" : "";
+const alternatePath = lang === "es" ? "/" : "/es/";
+---
+
+<ul class={`nav-links nav-links--${variant}`}>
+  <li><a href={`${base}/#solutions`}>{t.nav.solutions}</a></li>
+  <li><a href={`${base}/#benefits`}>{t.nav.performance}</a></li>
+  <li><a href={`${base}/#specs`}>{t.nav.techSpecs}</a></li>
+  <li class="nav-links__lang">
+    <a href={alternatePath} class="lang-switcher">
+      {lang === "es" ? "EN" : "ES"}
+    </a>
+  </li>
+</ul>
+
+<style>
+  .nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: var(--transition);
+  }
+
+  /* ── Navbar variant ── */
+  .nav-links--navbar {
+    color: var(--color-white);
+  }
+
+  .nav-links--navbar a:hover {
+    color: var(--color-yellow);
+  }
+
+  .nav-links--navbar .lang-switcher {
+    background-color: var(--color-yellow);
+    color: var(--color-black);
+    padding: 0.4rem 1rem;
+    transition: var(--transition);
+  }
+
+  .nav-links--navbar .lang-switcher:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+  }
+
+  /* ── Footer variant ── */
+  .nav-links--footer {
+    color: var(--color-gray-400);
+    gap: 1.5rem;
+  }
+
+  .nav-links--footer a:hover {
+    color: var(--color-yellow);
+  }
+
+  .nav-links--footer .lang-switcher {
+    color: var(--color-yellow);
+  }
+
+  /* ── Mobile variant ── */
+  .nav-links--mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    width: 100%;
+  }
+
+  .nav-links--mobile li {
+    width: 100%;
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .nav-links--mobile a {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: var(--color-white);
+    font-size: 1.2rem;
+    transition: var(--transition);
+  }
+
+  .nav-links--mobile a:hover {
+    color: var(--color-yellow);
+    background-color: #2a2a2a;
+  }
+
+  .nav-links--mobile .lang-switcher {
+    color: var(--color-yellow);
+  }
+</style>

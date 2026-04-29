@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import sitemap from '@astrojs/sitemap';
 
 const SITE = process.env.SITE || "https://roedwin-afk.github.io";
-const BASE = process.env.BASE || "/landing_floorinsulationpanels/";
+const BASE = process.env.BASE || "/landing_buildinginsulationpanels/";
 
 export default defineConfig({
   site: SITE,

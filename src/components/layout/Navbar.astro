@@ -1,0 +1,141 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+import NavLinks from "../ui/NavLinks.astro";
+import MobileMenu from "./MobileMenu.astro";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+const base = lang === "es" ? "/es" : "";
+---
+
+<nav class="navbar">
+  <div class="container navbar__inner">
+    <!-- Logo -->
+    <a href={`${base}/`} class="navbar__logo">
+      <span class="navbar__logo-icon">⬡</span>
+      <span class="navbar__logo-text">
+        BUILDING<span class="navbar__logo-highlight">INSULATION</span>PANELS
+      </span>
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="navbar__desktop">
+      <NavLinks t={t} lang={lang} variant="navbar" />
+      <a href={`${base}/#contact`} class="btn-primary navbar__cta">
+        {t.nav.getQuote}
+      </a>
+    </div>
+
+    <!-- Mobile Hamburger -->
+    <button
+      class="navbar__hamburger"
+      id="hamburger-btn"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<MobileMenu t={t} lang={lang} />
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-black);
+    border-bottom: 4px solid var(--color-yellow);
+  }
+
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5rem;
+  }
+
+  /* Logo */
+  .navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .navbar__logo-icon {
+    color: var(--color-yellow);
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+
+  .navbar__logo-highlight {
+    color: var(--color-yellow);
+  }
+
+  /* Desktop nav */
+  .navbar__desktop {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .navbar__cta {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.25rem;
+  }
+
+  /* Hamburger */
+  .navbar__hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .navbar__hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background-color: var(--color-white);
+    transition: var(--transition);
+  }
+
+  .navbar__hamburger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .navbar__hamburger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar__hamburger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (min-width: 768px) {
+    .navbar__desktop {
+      display: flex;
+    }
+
+    .navbar__hamburger {
+      display: none;
+    }
+  }
+</style>

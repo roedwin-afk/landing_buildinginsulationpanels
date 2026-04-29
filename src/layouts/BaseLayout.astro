@@ -1,0 +1,179 @@
+---
+import { ClientRouter } from "astro:transitions";
+import type { TranslationKeys } from "../i18n/en";
+import type { Lang } from "../i18n/utils";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+const canonicalURL = Astro.url.href;
+const alternateLang = lang === "en" ? "es" : "en";
+const alternateURL =
+  lang === "en"
+    ? Astro.url.href.replace(/\/$/, "") + "/es/"
+    : Astro.url.href.replace(/\/es\/?$/, "/");
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang={lang} href={canonicalURL} />
+    <link rel="alternate" hreflang={alternateLang} href={alternateURL} />
+    <link rel="alternate" hreflang="x-default" href={Astro.site + ""} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={t.meta.title} />
+    <meta name="twitter:description" content={t.meta.description} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <ClientRouter />
+  </head>
+  <body>
+    <Navbar t={t} lang={lang} />
+    <main>
+      <slot />
+    </main>
+    <Footer t={t} lang={lang} />
+
+    <style is:global>
+      :root {
+        /* Colors */
+        --color-yellow: #ffd700;
+        --color-black: #1a1a1a;
+        --color-white: #ffffff;
+        --color-gray-100: #f3f4f6;
+        --color-gray-200: #e5e7eb;
+        --color-gray-300: #d1d5db;
+        --color-gray-400: #9ca3af;
+        --color-gray-500: #6b7280;
+        --color-gray-600: #4b5563;
+        --color-gray-900: #111827;
+
+        /* Typography */
+        --font-heading: "Barlow Condensed", sans-serif;
+        --font-body: "Inter", sans-serif;
+
+        /* Spacing */
+        --section-padding: 6rem 1rem;
+        --container-max: 80rem;
+        --container-padding: 0 1.5rem;
+
+        /* Transitions */
+        --transition: all 0.3s ease;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        color: var(--color-black);
+        background-color: var(--color-white);
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: var(--font-heading);
+        text-transform: uppercase;
+        line-height: 1;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: var(--container-padding);
+      }
+
+      .btn-primary {
+        display: inline-block;
+        background-color: var(--color-yellow);
+        color: var(--color-black);
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: 0.75rem 2rem;
+        border: 2px solid var(--color-yellow);
+        cursor: pointer;
+        transition: var(--transition);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--color-black);
+        color: var(--color-yellow);
+      }
+
+      .btn-outline {
+        display: inline-block;
+        background-color: transparent;
+        color: var(--color-white);
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: 0.75rem 2rem;
+        border: 2px solid var(--color-white);
+        cursor: pointer;
+        transition: var(--transition);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .btn-outline:hover {
+        background-color: var(--color-white);
+        color: var(--color-black);
+      }
+    </style>
+  </body>
+</html>
