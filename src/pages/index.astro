@@ -8,6 +8,8 @@ import TrustBar from "../components/sections/TrustBar.astro";
 import BenefitsSection from "../components/sections/BenefitsSection.astro";
 import SolutionsSection from "../components/sections/SolutionsSection.astro";
 import CtaSection from "../components/sections/CtaSection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
+import MapSection from "../components/sections/MapSection.astro";
 
 const lang = getLang(Astro.url, import.meta.env.BASE_URL);
 const t = useTranslations(lang);
@@ -20,9 +22,9 @@ const t = useTranslations(lang);
 	<TrustBar t={t} lang={lang} />
 	<BenefitsSection t={t} lang={lang} />
 	<SolutionsSection t={t} lang={lang} />
-	<CtaSection t={t} lang={lang} />
-
-	<h1 style="padding: 4rem; text-align: center;">🚧 En construcción</h1>
+	<CtaSection t={t} lang={lang} />	
+	<ContactSection t={t} lang={lang} />	
+	<MapSection t={t} lang={lang} />	
 
 	<Footer t={t} lang={lang} />
 </BaseLayout>

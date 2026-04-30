@@ -117,6 +117,14 @@ export const en = {
     description:
       "High-performance thermal and acoustic insulation panels for warehouses, industrial plants, and commercial buildings. Reduce installation time by 40%.",
   },
+  notFound: {
+    badge: "Page Not Found",
+    title: "Wrong",
+    titleHighlight: "Blueprint.",
+    description: "This page doesn't exist or has been moved. Let's get you back on track.",
+    cta: "← Back to Home",
+  },
+  
 } as const;
 
 export type DeepString<T> = {

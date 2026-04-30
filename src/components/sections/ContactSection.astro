@@ -1,0 +1,330 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+import { Phone, Mail, MapPin } from "lucide-astro";
+import ScrollReveal from "../ui/ScrollReveal.astro";
+
+interface Props {
+    t: TranslationKeys;
+    lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+
+const site = import.meta.env.SITE ?? "https://roedwin-afk.github.io";
+const base = import.meta.env.BASE_URL ?? "/landing_buildinginsulationpanels/";
+const thankYouPath = lang === "es" ? "es/thank-you" : "thank-you";
+const thankYouUrl = `${site}${base}${thankYouPath}`;
+
+const contactItems = [
+    {
+        icon: Phone,
+        label: t.contact.phone.label,
+        value: t.contact.phone.value,
+    },
+    {
+        icon: Mail,
+        label: t.contact.email.label,
+        value: t.contact.email.value,
+    },
+    {
+        icon: MapPin,
+        label: t.contact.address.label,
+        value: t.contact.address.value,
+    },
+];
+---
+
+<section id="contact" class="contact">
+    <div class="contact__inner">
+        <ScrollReveal variant="fade-right">
+            <!-- Left column -->
+            <div class="contact__info">
+                <h2 class="contact__title">
+                    {t.contact.title}
+                    <span class="contact__title-highlight"
+                        >{t.contact.titleHighlight}</span
+                    >
+                </h2>
+                <p class="contact__description">{t.contact.description}</p>
+
+                <ul class="contact__list">
+                    {
+                        contactItems.map(({ icon: Icon, label, value }) => (
+                            <li class="contact__item">
+                                <div class="contact__icon">
+                                    <Icon size={16} />
+                                </div>
+                                <div>
+                                    <h4 class="contact__item-label">{label}</h4>
+                                    <p class="contact__item-value">{value}</p>
+                                </div>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </ScrollReveal>
+
+        <ScrollReveal variant="fade-left">
+            <!-- Right column: Zoho Form -->
+            <div class="contact__form-wrapper">
+                <form
+                    class="contact__form"
+                    action="https://forms.zohopublic.com/promaica/form/SolicituddeCotizacin/formperma/0G7mUvm1mHqTMr77oTQpng90acA6JYYKZtboiNDls70/htmlRecords/submit"
+                    name="form"
+                    method="POST"
+                    accept-charset="UTF-8"
+                    enctype="multipart/form-data"
+                >
+                    <input type="hidden" name="zf_referrer_name" value="" />
+                    <input
+                        type="hidden"
+                        name="zf_redirect_url"
+                        value={thankYouUrl}
+                    />
+                    <input type="hidden" name="zc_gad" value="" />
+
+                    <div class="form__row">
+                        <div class="form__group">
+                            <label class="form__label" for="Name_First"
+                                >{t.contact.form.name}</label
+                            >
+                            <input
+                                id="Name_First"
+                                type="text"
+                                name="Name_First"
+                                maxlength="255"
+                                class="form__input"
+                                placeholder={t.contact.form.namePlaceholder}
+                                required
+                            />
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label" for="Name_Last"
+                                >{t.contact.form.company}</label
+                            >
+                            <input
+                                id="Name_Last"
+                                type="text"
+                                name="Name_Last"
+                                maxlength="255"
+                                class="form__input"
+                                placeholder={t.contact.form.companyPlaceholder}
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form__group">
+                        <label class="form__label" for="projectType"
+                            >{t.contact.form.projectType}</label
+                        >
+                        <select
+                            id="projectType"
+                            name="Dropdown"
+                            class="form__input form__select"
+                        >
+                            <option>{t.contact.form.options.warehouse}</option>
+                            <option>{t.contact.form.options.coldStorage}</option
+                            >
+                            <option>{t.contact.form.options.office}</option>
+                            <option>{t.contact.form.options.industrial}</option>
+                        </select>
+                    </div>
+
+                    <div class="form__group">
+                        <label class="form__label" for="MultiLine"
+                            >{t.contact.form.message}</label
+                        >
+                        <textarea
+                            id="MultiLine"
+                            name="MultiLine"
+                            rows="5"
+                            class="form__input form__textarea"
+                            placeholder={t.contact.form.messagePlaceholder}
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="form__submit">
+                        {t.contact.form.submit}
+                    </button>
+                </form>
+            </div>
+        </ScrollReveal>
+    </div>
+</section>
+
+<style>
+    .contact {
+        padding: 6rem 1rem;
+        background-color: var(--color-white);
+    }
+
+    .contact__inner {
+        max-width: var(--container-max);
+        margin-inline: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    @media (min-width: 1024px) {
+        .contact__inner {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    /* Left column */
+    .contact__title {
+        font-size: 3rem;
+        font-weight: 700;
+        font-style: italic;
+        margin-bottom: 1.5rem;
+        line-height: 1;
+    }
+
+    @media (min-width: 768px) {
+        .contact__title {
+            font-size: 3.5rem;
+        }
+    }
+
+    .contact__title-highlight {
+        background-color: var(--color-black);
+        color: var(--color-yellow);
+        padding: 0 0.4rem;
+        font-style: normal;
+    }
+
+    .contact__description {
+        color: var(--color-gray-600);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 2.5rem;
+    }
+
+    .contact__list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .contact__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .contact__icon {
+        background-color: var(--color-yellow);
+        color: var(--color-black);
+        padding: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .contact__item-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.25rem;
+    }
+
+    .contact__item-value {
+        color: var(--color-gray-600);
+        font-size: 0.95rem;
+    }
+
+    /* Form */
+    .contact__form-wrapper {
+        background-color: var(--color-gray-100);
+        padding: 2.5rem;
+        border-top: 8px solid var(--color-yellow);
+    }
+
+    .contact__form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .form__row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+        .form__row {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .form__group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .form__label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .form__input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid var(--color-gray-300);
+        background-color: var(--color-white);
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        color: var(--color-black);
+        outline: none;
+        transition: border-color 0.2s ease;
+    }
+
+    .form__input:focus {
+        border-color: var(--color-black);
+    }
+
+    .form__select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%231a1a1a' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        padding-right: 2rem;
+    }
+
+    .form__textarea {
+        resize: vertical;
+        min-height: 8rem;
+    }
+
+    .form__submit {
+        width: 100%;
+        background-color: var(--color-black);
+        color: var(--color-white);
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 1rem;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        transition: var(--transition);
+    }
+
+    .form__submit:hover {
+        background-color: var(--color-yellow);
+        color: var(--color-black);
+    }
+</style>

@@ -119,4 +119,11 @@ export const es: TranslationKeys = {
     description:
       "Paneles de aislamiento térmico y acústico de alto rendimiento para almacenes, plantas industriales y edificios comerciales. Reduce el tiempo de instalación en un 40%.",
   },
+  notFound: {
+  badge: "Página No Encontrada",
+  title: "Plano",
+  titleHighlight: "Equivocado.",
+  description: "Esta página no existe o fue movida. Regresemos al inicio.",
+  cta: "← Volver al Inicio",
+},
 };

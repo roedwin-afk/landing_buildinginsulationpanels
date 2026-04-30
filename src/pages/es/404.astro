@@ -1,6 +1,6 @@
 ---
-import { useTranslations, getLang } from "../i18n/utils";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import { useTranslations, getLang } from "../../i18n/utils";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const base = import.meta.env.BASE_URL;
 const lang = getLang(Astro.url, base);
@@ -10,23 +10,23 @@ const isEs = lang === "es";
 ---
 
 <BaseLayout t={t} lang={lang}>
-    <section class="not-found">
-        <div class="not-found__inner">
-            <div class="not-found__badge">{t.notFound.badge}</div>
+  <section class="not-found">
+    <div class="not-found__inner">
+      <div class="not-found__badge">{t.notFound.badge}</div>
 
-            <h1 class="not-found__title">
-                {t.notFound.title}
-                <span class="not-found__highlight"
-                    >{t.notFound.titleHighlight}</span
-                >
-            </h1>
+      <h1 class="not-found__title">
+        {t.notFound.title}
+        <span class="not-found__highlight">{t.notFound.titleHighlight}</span>
+      </h1>
 
-            <p class="not-found__description">{t.notFound.description}</p>
+      <p class="not-found__description">{t.notFound.description}</p>
 
-            <a href={base} class="btn-primary">{t.notFound.cta}</a>
-        </div>
-    </section>
+      <a href={base} class="btn-primary">{t.notFound.cta}</a>
+    </div>
+  </section>
+
 </BaseLayout>
+
 
 <style>
   .not-found {
