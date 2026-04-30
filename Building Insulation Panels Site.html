@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Insulation Panels | High-Performance Industrial Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;600;700&display=swap');
+        
+        :root {
+            --construction-yellow: #FFD700;
+            --industrial-black: #1A1A1A;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Barlow Condensed', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .bg-construction {
+            background-color: var(--construction-yellow);
+        }
+
+        .text-construction {
+            color: var(--construction-yellow);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .btn-primary {
+            @apply bg-yellow-400 text-black font-bold py-3 px-8 rounded-none transition-all duration-300 hover:bg-black hover:text-yellow-400 border-2 border-yellow-400 inline-block;
+        }
+
+        .btn-outline {
+            @apply border-2 border-white text-white font-bold py-3 px-8 rounded-none transition-all duration-300 hover:bg-white hover:text-black inline-block;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            border-bottom: 4px solid var(--construction-yellow);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="bg-black text-white sticky top-0 z-50 border-b-4 border-yellow-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-hard-hat text-construction text-3xl mr-2"></i>
+                        <span class="text-2xl font-bold tracking-tighter brand-font">BUILDING<span class="text-construction">INSULATION</span>PANELS</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8 font-semibold text-sm uppercase tracking-wider">
+                    <a href="#solutions" class="hover:text-construction transition-colors">Solutions</a>
+                    <a href="#benefits" class="hover:text-construction transition-colors">Performance</a>
+                    <a href="#specs" class="hover:text-construction transition-colors">Tech Specs</a>
+                    <a href="#contact" class="bg-construction text-black px-4 py-2 hover:bg-white transition-all">Get Quote</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="text-white hover:text-construction">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient min-h-[85vh] flex items-center text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
+            <div class="max-w-3xl">
+                <div class="inline-block bg-construction text-black px-4 py-1 font-bold mb-6 tracking-widest text-sm">INDUSTRIAL GRADE PROTECTION</div>
+                <h1 class="text-6xl md:text-8xl font-extrabold leading-none mb-6">
+                    BUILT FOR <span class="text-construction">SPEED.</span><br>
+                    ENGINEERED FOR <span class="text-construction">STRENGTH.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl">
+                    High-performance thermal and acoustic insulation panels for warehouses, industrial plants, and commercial buildings. Reduce installation time by 40%.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="btn-primary text-center">REQUEST A QUOTE</a>
+                    <a href="#solutions" class="btn-outline text-center">VIEW SOLUTIONS</a>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative bar -->
+        <div class="absolute bottom-0 left-0 w-full h-4 bg-construction"></div>
+    </header>
+
+    <!-- Trust Bar -->
+    <section class="bg-gray-100 py-8 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500 font-bold uppercase tracking-widest text-xs mb-6">Trusted by Civil Engineers & Industrial Developers Worldwide</p>
+            <div class="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale">
+                <span class="text-2xl font-black italic">GLOBALCON</span>
+                <span class="text-2xl font-black italic">STEELCORE</span>
+                <span class="text-2xl font-black italic">INDUS-X</span>
+                <span class="text-2xl font-black italic">ARCHI-TECH</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Benefits -->
+    <section id="benefits" class="py-24">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-4 border-black">
+                <div class="p-12 bg-black text-white flex flex-col items-center text-center">
+                    <i class="fas fa-bolt text-construction text-5xl mb-6"></i>
+                    <h3 class="text-3xl font-bold mb-4">Fast-Track Install</h3>
+                    <p class="text-gray-400">Our interlocking tongue-and-groove system allows for rapid deployment, drastically cutting labor costs and project timelines.</p>
+                </div>
+                <div class="p-12 bg-white text-black flex flex-col items-center text-center border-x-4 border-black">
+                    <i class="fas fa-shield-alt text-black text-5xl mb-6"></i>
+                    <h3 class="text-3xl font-bold mb-4">Extreme Durability</h3>
+                    <p class="text-gray-600">Built to withstand harsh environments, heavy load bearing, and extreme weather conditions with zero degradation.</p>
+                </div>
+                <div class="p-12 bg-construction text-black flex flex-col items-center text-center">
+                    <i class="fas fa-temperature-low text-black text-5xl mb-6"></i>
+                    <h3 class="text-3xl font-bold mb-4">Thermal Efficiency</h3>
+                    <p class="text-black/80 font-medium">Highest R-Value in the market. Significant reduction in HVAC energy consumption for large-scale industrial spaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions / Products -->
+    <section id="solutions" class="bg-gray-50 py-24 border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                <div>
+                    <h2 class="text-5xl font-bold mb-4">Construction <span class="text-construction bg-black px-2">Solutions</span></h2>
+                    <p class="text-gray-600 text-lg">Specialized panels for every structural requirement.</p>
+                </div>
+                <a href="#" class="text-black font-bold underline mt-4 md:mt-0 hover:text-yellow-600">DOWNLOAD PRODUCT CATALOG (PDF)</a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="bg-white border-2 border-gray-200 p-8 card-hover transition-all">
+                    <div class="bg-gray-100 h-48 mb-6 flex items-center justify-center">
+                        <i class="fas fa-layer-group text-6xl text-gray-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Wall Insulation Panels</h3>
+                    <p class="text-gray-600 mb-6 text-sm">Perfect for industrial facades. Fire-rated materials with aesthetic finishes for a modern industrial look.</p>
+                    <ul class="text-sm font-semibold mb-6 space-y-2">
+                        <li><i class="fas fa-check text-construction mr-2"></i> Fire Rating: Class A</li>
+                        <li><i class="fas fa-check text-construction mr-2"></i> Thickness: 50mm - 200mm</li>
+                    </ul>
+                    <a href="#contact" class="text-black font-bold hover:translate-x-2 transition-transform inline-block">LEARN MORE <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="bg-white border-2 border-gray-200 p-8 card-hover transition-all">
+                    <div class="bg-gray-100 h-48 mb-6 flex items-center justify-center">
+                        <i class="fas fa-roof-smart text-6xl text-gray-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Roofing Systems</h3>
+                    <p class="text-gray-600 mb-6 text-sm">High-load resistance panels with superior weatherproofing. Designed for large-span industrial roofs.</p>
+                    <ul class="text-sm font-semibold mb-6 space-y-2">
+                        <li><i class="fas fa-check text-construction mr-2"></i> UV Resistance Coating</li>
+                        <li><i class="fas fa-check text-construction mr-2"></i> Acoustic Dampening</li>
+                    </ul>
+                    <a href="#contact" class="text-black font-bold hover:translate-x-2 transition-transform inline-block">LEARN MORE <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="bg-white border-2 border-gray-200 p-8 card-hover transition-all">
+                    <div class="bg-gray-100 h-48 mb-6 flex items-center justify-center">
+                        <i class="fas fa-border-all text-6xl text-gray-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Cold Storage Panels</h3>
+                    <p class="text-gray-600 mb-6 text-sm">High-density core panels specifically engineered for temperature-controlled environments and food processing plants.</p>
+                    <ul class="text-sm font-semibold mb-6 space-y-2">
+                        <li><i class="fas fa-check text-construction mr-2"></i> USDA Approved Coatings</li>
+                        <li><i class="fas fa-check text-construction mr-2"></i> Zero Thermal Bridging</li>
+                    </ul>
+                    <a href="#contact" class="text-black font-bold hover:translate-x-2 transition-transform inline-block">LEARN MORE <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specs CTA -->
+    <section id="specs" class="bg-black text-white py-20 relative overflow-hidden">
+        <div class="absolute right-0 top-0 h-full w-1/3 bg-construction transform skew-x-12 translate-x-20 opacity-10 md:opacity-100"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="max-w-2xl">
+                <h2 class="text-5xl font-bold mb-8">Ready for your <span class="text-construction">Next Big Project?</span></h2>
+                <div class="grid grid-cols-2 gap-8 mb-10">
+                    <div>
+                        <span class="text-4xl font-bold text-construction">40%</span>
+                        <p class="text-gray-400 font-bold uppercase text-xs tracking-widest mt-2">Faster Installation</p>
+                    </div>
+                    <div>
+                        <span class="text-4xl font-bold text-construction">R-30+</span>
+                        <p class="text-gray-400 font-bold uppercase text-xs tracking-widest mt-2">Energy Efficiency</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 mb-8">Our engineers provide full BIM support and technical documentation for architects and planners.</p>
+                <button class="btn-primary">GET TECHNICAL DATA SHEET</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="text-5xl font-bold mb-6 italic">CONTACT AN <span class="text-construction bg-black px-2 not-italic">EXPERT</span></h2>
+                    <p class="text-gray-600 mb-10 text-lg">Send us your project blueprints or requirements. Our technical team will provide a comprehensive quote and installation plan within 24 hours.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-construction p-3 mr-4">
+                                <i class="fas fa-phone-alt text-black"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold uppercase text-sm">Direct Line</h4>
+                                <p class="text-gray-600">+1 (800) 555-PANEL</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-construction p-3 mr-4">
+                                <i class="fas fa-envelope text-black"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold uppercase text-sm">Email Enquiries</h4>
+                                <p class="text-gray-600">sales@buildinginsulationpanels.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-construction p-3 mr-4">
+                                <i class="fas fa-map-marker-alt text-black"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold uppercase text-sm">Headquarters</h4>
+                                <p class="text-gray-600">Industrial District, Building 7, Houston, TX</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-100 p-10 border-t-8 border-construction">
+                    <form id="quoteForm" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase mb-1">Full Name</label>
+                                <input type="text" class="w-full p-3 border-2 border-gray-300 focus:border-black outline-none" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase mb-1">Company</label>
+                                <input type="text" class="w-full p-3 border-2 border-gray-300 focus:border-black outline-none" placeholder="Architecture Firm LLC">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-1">Project Type</label>
+                            <select class="w-full p-3 border-2 border-gray-300 focus:border-black outline-none bg-white">
+                                <option>Warehouse / Logistic Center</option>
+                                <option>Cold Storage Facility</option>
+                                <option>Office Building</option>
+                                <option>Industrial Plant</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-1">Message / Project Details</label>
+                            <textarea rows="4" class="w-full p-3 border-2 border-gray-300 focus:border-black outline-none" placeholder="Describe your project requirements..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-black text-white font-bold py-4 hover:bg-yellow-400 hover:text-black transition-all uppercase tracking-widest">Submit Quote Request</button>
+                    </form>
+                    <div id="formSuccess" class="hidden mt-4 p-4 bg-green-100 text-green-700 font-bold text-center">
+                        Request sent successfully! We'll contact you shortly.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 border-t-4 border-construction">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center">
+                    <i class="fas fa-hard-hat text-construction text-3xl mr-2"></i>
+                    <span class="text-xl font-bold tracking-tighter brand-font">BUILDING<span class="text-construction">INSULATION</span>PANELS</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-construction transition-colors"><i class="fab fa-linkedin-in text-xl"></i></a>
+                    <a href="#" class="hover:text-construction transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="hover:text-construction transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="hover:text-construction transition-colors"><i class="fab fa-youtube text-xl"></i></a>
+                </div>
+                <p class="text-gray-500 text-sm">© 2026 Building Insulation Panels Corp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple form handling
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.classList.add('hidden');
+            document.getElementById('formSuccess').classList.remove('hidden');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

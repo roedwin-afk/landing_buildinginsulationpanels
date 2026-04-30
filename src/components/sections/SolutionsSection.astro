@@ -1,0 +1,259 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import { Layers, Home, Grid } from "lucide-astro";
+import ScrollReveal from "../ui/ScrollReveal.astro";
+
+interface Props {
+    t: TranslationKeys;
+    lang: string;
+}
+
+const { t, lang } = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const products = [
+    {
+        icon: Layers,
+        title: t.solutions.wall.title,
+        description: t.solutions.wall.description,
+        specs: [t.solutions.wall.spec1, t.solutions.wall.spec2],
+    },
+    {
+        icon: Home,
+        title: t.solutions.roofing.title,
+        description: t.solutions.roofing.description,
+        specs: [t.solutions.roofing.spec1, t.solutions.roofing.spec2],
+    },
+    {
+        icon: Grid,
+        title: t.solutions.coldStorage.title,
+        description: t.solutions.coldStorage.description,
+        specs: [t.solutions.coldStorage.spec1, t.solutions.coldStorage.spec2],
+    },
+];
+
+const delays = [1, 2, 3] as const;
+---
+
+<section id="solutions" class="solutions">
+    <div class="solutions__inner">
+        <div class="solutions__header">
+            <div>
+                <h2 class="solutions__title">
+                    {t.solutions.title}
+                    <span class="solutions__title-highlight"
+                        >{t.solutions.titleHighlight}</span
+                    >
+                </h2>
+                <p class="solutions__subtitle">{t.solutions.subtitle}</p>
+            </div>
+            <a href={`${base}/catalog.pdf`} class="solutions__download">
+                ↓ {t.solutions.downloadCatalog}
+            </a>
+        </div>
+
+        <div class="solutions__grid">
+            {
+                products.map(({ icon: Icon, title, description, specs }, i) => (
+                    <ScrollReveal variant="fade-down" delay={delays[i]}>
+                        <article class="solution-card">
+                            <div class="solution-card__image">
+                                <Icon size={64} />
+                            </div>
+                            <h3 class="solution-card__title">{title}</h3>
+                            <p class="solution-card__description">
+                                {description}
+                            </p>
+                            <ul class="solution-card__specs">
+                                {specs.map((spec) => (
+                                    <li class="solution-card__spec">
+                                        <span class="solution-card__check">
+                                            ✓
+                                        </span>
+                                        {spec}
+                                    </li>
+                                ))}
+                            </ul>
+                            <a href={`#contact`} class="solution-card__link">
+                                {t.solutions.learnMore} →
+                            </a>
+                        </article>
+                    </ScrollReveal>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .solutions {
+        background-color: var(--color-gray-100);
+        padding: 6rem 1rem;
+        border-top: 1px solid var(--color-gray-200);
+        border-bottom: 1px solid var(--color-gray-200);
+    }
+
+    .solutions__inner {
+        max-width: var(--container-max);
+        margin-inline: auto;
+    }
+
+    /* Header */
+    .solutions__header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 4rem;
+    }
+
+    .solutions__title {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+
+    .solutions__title-highlight {
+        background-color: var(--color-black);
+        color: var(--color-yellow);
+        padding: 0 0.4rem;
+        margin-left: 0.25rem;
+    }
+
+    .solutions__subtitle {
+        color: var(--color-gray-600);
+        font-size: 1.1rem;
+    }
+
+    .solutions__download {
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-decoration: underline;
+        color: var(--color-black);
+        transition: var(--transition);
+        align-self: flex-start;
+    }
+
+    .solutions__download:hover {
+        color: var(--color-gray-600);
+    }
+
+    @media (min-width: 768px) {
+        .solutions__header {
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+
+        .solutions__download {
+            align-self: flex-end;
+        }
+
+        .solutions__title {
+            font-size: 3.5rem;
+        }
+    }
+
+    /* Grid */
+    .solutions__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .solutions__grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .solutions__grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* Card */
+    .solution-card {
+        background-color: var(--color-white);
+        border: 2px solid var(--color-gray-200);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        height: 100%;
+        transition:
+            transform 0.3s ease,
+            border-bottom-color 0.3s ease;
+    }
+
+    .solution-card:hover {
+        transform: translateY(-5px);
+        border-bottom: 4px solid var(--color-yellow);
+    }
+
+    .solution-card__image {
+        background-color: var(--color-gray-100);
+        height: 12rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-gray-300);
+    }
+
+    .solution-card__title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-black);
+    }
+
+    .solution-card__description {
+        font-size: 0.875rem;
+        color: var(--color-gray-600);
+        line-height: 1.6;
+        /* flex: 1; */
+    }
+
+    .solution-card__specs {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    .solution-card__spec {
+        font-size: 0.875rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .solution-card__check {
+        color: var(--color-yellow);
+        font-weight: 900;
+        background-color: var(--color-black);
+        width: 1.1rem;
+        height: 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+        flex-shrink: 0;
+    }
+
+    .solution-card__link {
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--color-black);
+        display: inline-block;
+        transition: transform 0.2s ease;
+    }
+
+    .solution-card__link:hover {
+        transform: translateX(4px);
+    }
+</style>

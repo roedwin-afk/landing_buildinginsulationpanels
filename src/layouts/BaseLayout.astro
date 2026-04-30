@@ -2,8 +2,6 @@
 import { ClientRouter } from "astro:transitions";
 import type { TranslationKeys } from "../i18n/en";
 import type { Lang } from "../i18n/utils";
-import Navbar from "../components/layout/Navbar.astro";
-import Footer from "../components/layout/Footer.astro";
 
 interface Props {
   t: TranslationKeys;
@@ -54,15 +52,14 @@ const alternateURL =
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <ClientRouter />
   </head>
   <body>
-    
     <main>
       <slot />
     </main>
-    
 
     <style is:global>
       :root {
@@ -173,6 +170,53 @@ const alternateURL =
       .btn-outline:hover {
         background-color: var(--color-white);
         color: var(--color-black);
+      }
+
+      /* ─── Scroll Reveal ─────────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+
+      .reveal.fade-up {
+        transform: translateY(28px);
+      }
+      .reveal.fade-down {
+        transform: translateY(-28px);
+      }
+      .reveal.fade-left {
+        transform: translateX(-28px);
+      }
+      .reveal.fade-right {
+        transform: translateX(28px);
+      }
+      .reveal.fade-in {
+        transform: none;
+      }
+
+      .reveal-delay-1 {
+        transition-delay: 150ms;
+      }
+      .reveal-delay-2 {
+        transition-delay: 300ms;
+      }
+      .reveal-delay-3 {
+        transition-delay: 450ms;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translate(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
       }
     </style>
   </body>

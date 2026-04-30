@@ -1,6 +1,7 @@
 ---
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
+import ScrollReveal from "../ui/ScrollReveal.astro";
 
 interface Props {
   t: TranslationKeys;
@@ -24,6 +25,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
         <span class="hero__highlight">{t.hero.titleStrengthHighlight}</span>
       </h1>
       <p class="hero__description">{t.hero.description}</p>
+      <ScrollReveal variant="fade-left" delay={1}>
       <div class="hero__actions">
         <a href={`${langPrefix}/#contact`} class="btn-primary">
           {t.hero.ctaPrimary}
@@ -32,6 +34,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
           {t.hero.ctaSecondary}
         </a>
       </div>
+      </ScrollReveal>
     </div>
   </div>
   <div class="hero__bar"></div>

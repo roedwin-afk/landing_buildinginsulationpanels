@@ -4,6 +4,10 @@ import { getLang, useTranslations } from "../i18n/utils";
 import Navbar from "../components/layout/Navbar.astro";
 import Footer from "../components/layout/Footer.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
+import TrustBar from "../components/sections/TrustBar.astro";
+import BenefitsSection from "../components/sections/BenefitsSection.astro";
+import SolutionsSection from "../components/sections/SolutionsSection.astro";
+import CtaSection from "../components/sections/CtaSection.astro";
 
 const lang = getLang(Astro.url, import.meta.env.BASE_URL);
 const t = useTranslations(lang);
@@ -13,6 +17,10 @@ const t = useTranslations(lang);
 	<Navbar t={t} lang={lang} />
 
 	<HeroSection t={t} lang={lang} />
+	<TrustBar t={t} lang={lang} />
+	<BenefitsSection t={t} lang={lang} />
+	<SolutionsSection t={t} lang={lang} />
+	<CtaSection t={t} lang={lang} />
 
 	<h1 style="padding: 4rem; text-align: center;">🚧 En construcción</h1>
 
