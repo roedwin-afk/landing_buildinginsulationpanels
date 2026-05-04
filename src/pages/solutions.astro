@@ -1,0 +1,428 @@
+---
+import { useTranslations, getLang } from "../i18n/utils";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ScrollReveal from "../components/ui/ScrollReveal.astro";
+import CtaSection from "../components/sections/CtaSection.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import { Layers, Home, Grid, Check } from "lucide-astro";
+
+const base = import.meta.env.BASE_URL;
+const lang = getLang(Astro.url, base);
+const t = useTranslations(lang);
+
+const products = [
+    {
+        icon: Layers,
+        key: "wall",
+        title: t.solutionsPage.wall.title,
+        description: t.solutionsPage.wall.description,
+        specs: Object.values(t.solutionsPage.wall.specs),
+    },
+    {
+        icon: Home,
+        key: "roofing",
+        title: t.solutionsPage.roofing.title,
+        description: t.solutionsPage.roofing.description,
+        specs: Object.values(t.solutionsPage.roofing.specs),
+    },
+    {
+        icon: Grid,
+        key: "coldStorage",
+        title: t.solutionsPage.coldStorage.title,
+        description: t.solutionsPage.coldStorage.description,
+        specs: Object.values(t.solutionsPage.coldStorage.specs),
+    },
+];
+
+const comparisonRows = [
+    {
+        feature: t.solutionsPage.comparison.fireRating,
+        wall: "Class A",
+        roofing: "Class A",
+        coldStorage: "Class A",
+    },
+    {
+        feature: t.solutionsPage.comparison.rValue,
+        wall: "R-15",
+        roofing: "R-20",
+        coldStorage: "R-30+",
+    },
+    {
+        feature: t.solutionsPage.comparison.maxThickness,
+        wall: "200mm",
+        roofing: "200mm",
+        coldStorage: "250mm",
+    },
+    {
+        feature: t.solutionsPage.comparison.warranty,
+        wall: "20 yr",
+        roofing: "25 yr",
+        coldStorage: "25 yr",
+    },
+    {
+        feature: t.solutionsPage.comparison.usdaApproved,
+        wall: false,
+        roofing: false,
+        coldStorage: true,
+    },
+];
+---
+
+<BaseLayout t={t} lang={lang}>
+    <Navbar t={t} lang={lang} />
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="page-hero__inner">
+            <ScrollReveal variant="fade-up">
+                <div class="page-hero__badge">{t.solutionsPage.hero.badge}</div>
+                <h1 class="page-hero__title">
+                    {t.solutionsPage.hero.title}
+                    <span class="page-hero__highlight"
+                        >{t.solutionsPage.hero.titleHighlight}</span
+                    >
+                </h1>
+                <p class="page-hero__description">
+                    {t.solutionsPage.hero.description}
+                </p>
+            </ScrollReveal>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products">
+        <div class="products__inner">
+            {
+                products.map(({ icon: Icon, title, description, specs }, i) => (
+                    <ScrollReveal variant="fade-up" delay={i as 0 | 1 | 2}>
+                        <article class="product-card">
+                            <div class="product-card__icon-wrapper">
+                                <Icon size={56} />
+                            </div>
+                            <div class="product-card__content">
+                                <h2 class="product-card__title">{title}</h2>
+                                <p class="product-card__description">
+                                    {description}
+                                </p>
+                                <ul class="product-card__specs">
+                                    {specs.map((spec) => (
+                                        <li class="product-card__spec">
+                                            <span class="product-card__check">
+                                                <Check size={12} />
+                                            </span>
+                                            {spec}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <a href={`${base}#contact`} class="btn-primary">
+                                    {t.solutionsPage.cta.button}
+                                </a>
+                            </div>
+                        </article>
+                    </ScrollReveal>
+                ))
+            }
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison">
+        <div class="comparison__inner">
+            <ScrollReveal variant="fade-up">
+                <h2 class="comparison__title">
+                    {t.solutionsPage.comparison.title}
+                    <span class="comparison__highlight"
+                        >{t.solutionsPage.comparison.titleHighlight}</span
+                    >
+                </h2>
+                <p class="comparison__subtitle">
+                    {t.solutionsPage.comparison.subtitle}
+                </p>
+            </ScrollReveal>
+
+            <ScrollReveal variant="fade-up" delay={1}>
+                <div class="comparison__table-wrapper">
+                    <table class="comparison__table">
+                        <thead>
+                            <tr>
+                                <th>{t.solutionsPage.comparison.feature}</th>
+                                <th>{t.solutionsPage.wall.title}</th>
+                                <th>{t.solutionsPage.roofing.title}</th>
+                                <th>{t.solutionsPage.coldStorage.title}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                comparisonRows.map((row) => (
+                                    <tr>
+                                        <td class="comparison__feature">
+                                            {row.feature}
+                                        </td>
+                                        {[
+                                            row.wall,
+                                            row.roofing,
+                                            row.coldStorage,
+                                        ].map((val) => (
+                                            <td>
+                                                {typeof val === "boolean"
+                                                    ? val
+                                                        ? t.solutionsPage
+                                                              .comparison.yes
+                                                        : t.solutionsPage
+                                                              .comparison.no
+                                                    : val}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </ScrollReveal>
+        </div>
+    </section>
+
+    <CtaSection t={t} lang={lang} />
+
+    <Footer t={t} lang={lang} />
+</BaseLayout>
+
+<style>
+    /* Hero */
+    .page-hero {
+        background-color: var(--color-black);
+        padding: 6rem 1rem 5rem;
+        border-bottom: 4px solid var(--color-yellow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .page-hero::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 30%;
+        background-color: var(--color-yellow);
+        transform: skewX(12deg) translateX(5rem);
+        opacity: 0.08;
+        pointer-events: none;
+    }
+
+    @media (min-width: 768px) {
+        .page-hero::after {
+            opacity: 1;
+        }
+    }
+
+    .page-hero__inner {
+        max-width: var(--container-max);
+        margin-inline: auto;
+        position: relative;
+        z-index: 1;
+        max-width: 48rem;
+    }
+
+    .page-hero__badge {
+        display: inline-block;
+        background-color: var(--color-yellow);
+        color: var(--color-black);
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        padding: 0.35rem 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .page-hero__title {
+        font-size: clamp(3rem, 8vw, 5.5rem);
+        font-weight: 700;
+        color: var(--color-white);
+        line-height: 1;
+        margin-bottom: 1.5rem;
+    }
+
+    .page-hero__highlight {
+        color: var(--color-yellow);
+    }
+
+    .page-hero__description {
+        color: var(--color-gray-300);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        max-width: 40rem;
+    }
+
+    /* Products */
+    .products {
+        padding: 6rem 1rem;
+        background-color: var(--color-white);
+    }
+
+    .products__inner {
+        max-width: var(--container-max);
+        margin-inline: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+    }
+
+    .product-card {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        border: 2px solid var(--color-gray-200);
+        padding: 2.5rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .product-card:hover {
+        border-color: var(--color-yellow);
+    }
+
+    @media (min-width: 768px) {
+        .product-card {
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+        }
+    }
+
+    .product-card__icon-wrapper {
+        background-color: var(--color-gray-100);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-gray-300);
+        min-height: 160px;
+    }
+
+    .product-card__content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .product-card__title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--color-black);
+    }
+
+    .product-card__description {
+        color: var(--color-gray-600);
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .product-card__specs {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+
+    .product-card__spec {
+        font-size: 0.875rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .product-card__check {
+        background-color: var(--color-black);
+        color: var(--color-yellow);
+        width: 1.25rem;
+        height: 1.25rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    /* Comparison */
+    .comparison {
+        background-color: var(--color-gray-100);
+        padding: 6rem 1rem;
+        border-top: 1px solid var(--color-gray-200);
+        border-bottom: 1px solid var(--color-gray-200);
+    }
+
+    .comparison__inner {
+        max-width: var(--container-max);
+        margin-inline: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .comparison__title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+
+    .comparison__highlight {
+        background-color: var(--color-black);
+        color: var(--color-yellow);
+        padding: 0 0.4rem;
+    }
+
+    .comparison__subtitle {
+        color: var(--color-gray-600);
+        font-size: 1rem;
+    }
+
+    .comparison__table-wrapper {
+        overflow-x: auto;
+    }
+
+    .comparison__table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+    }
+
+    .comparison__table thead tr {
+        background-color: var(--color-black);
+        color: var(--color-white);
+    }
+
+    .comparison__table th {
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 1rem 1.5rem;
+        text-align: left;
+        letter-spacing: 0.05em;
+    }
+
+    .comparison__table th:first-child {
+        color: var(--color-yellow);
+    }
+
+    .comparison__table td {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--color-gray-200);
+        color: var(--color-gray-600);
+    }
+
+    .comparison__feature {
+        font-weight: 700;
+        color: var(--color-black) !important;
+    }
+
+    .comparison__table tbody tr:nth-child(even) {
+        background-color: var(--color-white);
+    }
+
+    .comparison__table tbody tr:hover {
+        background-color: #fffbea;
+    }
+</style>

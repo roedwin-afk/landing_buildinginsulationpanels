@@ -28,16 +28,16 @@ export function useTranslations(lang: Lang) {
   return translations[lang];
 }
 
-export function getAlternatePath(url: URL, base: string = "/"): string {
-  const pathname = url.pathname.replace(base, "");
-  const isEs = pathname.startsWith("es");
+export function getAlternatePath(url: URL, base: string): string {
+  const path = url.pathname.replace(base, '') || '';
+  const isEs = path.startsWith('/es') || path === 'es';
 
+  
   if (isEs) {
-    // Estamos en /es → alternativa es /
-    const withoutEs = pathname.replace(/^es\/?/, "");
-    return base + (withoutEs || "");
+    const clean = path.replace(/^\/es?/, '') || '';
+    
+    return base + (clean ? clean : '');
   } else {
-    // Estamos en / → alternativa es /es/
-    return base + "es/" + (pathname || "");
+    return base + '/es' + path;
   }
 }

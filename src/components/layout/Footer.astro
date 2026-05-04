@@ -2,7 +2,10 @@
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
 import NavLinks from "../ui/NavLinks.astro";
+import { Image } from "astro:assets";
 import { Linkedin, Facebook, Instagram, Youtube } from "lucide-astro";
+
+import logo from "../../assets/logo.svg";
 
 interface Props {
     t: TranslationKeys;
@@ -25,7 +28,7 @@ const socials = [
     <div class="footer__inner">
         <!-- Logo -->
         <a href={`${base}/`} class="footer__logo">
-            <svg
+            <!-- <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="28"
                 height="28"
@@ -44,7 +47,17 @@ const socials = [
             <span class="footer__logo-text">
                 BUILDING<span class="footer__logo-highlight">INSULATION</span
                 >PANELS
-            </span>
+            </span> -->
+            <Image
+                src={logo}
+                alt="Panel sándwich para techo industrial"
+                width={200}
+                height={50}
+                class="navbar__logo-img"
+                format="webp"
+                quality={85}
+                loading="eager"
+            />
         </a>
 
         <!-- Social -->
@@ -123,6 +136,13 @@ const socials = [
 
     .footer__logo-highlight {
         color: var(--color-yellow);
+    }
+
+    .navbar__logo-img {
+        display: block;
+        height: 2.5rem;
+        width: auto;
+        filter: brightness(0) invert(1);
     }
 
     /* Socials */

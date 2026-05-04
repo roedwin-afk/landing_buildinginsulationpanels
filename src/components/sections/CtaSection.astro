@@ -8,6 +8,8 @@ interface Props {
 }
 
 const { t } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <section id="specs" class="cta">
@@ -33,7 +35,7 @@ const { t } = Astro.props;
 
             <p class="cta__description">{t.cta.description}</p>
 
-            <a href="#contact" class="btn-primary">{t.cta.button}</a>
+            <a href={`${base}#contact`} class="btn-primary">{t.cta.button}</a>
         </ScrollReveal>
     </div>
 

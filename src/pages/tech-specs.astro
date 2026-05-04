@@ -1,0 +1,390 @@
+---
+import { useTranslations, getLang } from "../i18n/utils";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ScrollReveal from "../components/ui/ScrollReveal.astro";
+import CtaSection from "../components/sections/CtaSection.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import { FileText, Box, BookOpen, Shield } from "lucide-astro";
+
+const base = import.meta.env.BASE_URL;
+const lang = getLang(Astro.url, base);
+const t = useTranslations(lang);
+
+const tableRows = [
+  { spec: t.techSpecsPage.table.rValue,     wall: t.techSpecsPage.table.values.wall.rValue,     roofing: t.techSpecsPage.table.values.roofing.rValue,     cold: t.techSpecsPage.table.values.coldStorage.rValue },
+  { spec: t.techSpecsPage.table.thickness,  wall: t.techSpecsPage.table.values.wall.thickness,  roofing: t.techSpecsPage.table.values.roofing.thickness,  cold: t.techSpecsPage.table.values.coldStorage.thickness },
+  { spec: t.techSpecsPage.table.fireRating, wall: t.techSpecsPage.table.values.wall.fireRating, roofing: t.techSpecsPage.table.values.roofing.fireRating, cold: t.techSpecsPage.table.values.coldStorage.fireRating },
+  { spec: t.techSpecsPage.table.tempRange,  wall: t.techSpecsPage.table.values.wall.tempRange,  roofing: t.techSpecsPage.table.values.roofing.tempRange,  cold: t.techSpecsPage.table.values.coldStorage.tempRange },
+  { spec: t.techSpecsPage.table.weight,     wall: t.techSpecsPage.table.values.wall.weight,     roofing: t.techSpecsPage.table.values.roofing.weight,     cold: t.techSpecsPage.table.values.coldStorage.weight },
+  { spec: t.techSpecsPage.table.maxSpan,    wall: t.techSpecsPage.table.values.wall.maxSpan,    roofing: t.techSpecsPage.table.values.roofing.maxSpan,    cold: t.techSpecsPage.table.values.coldStorage.maxSpan },
+  { spec: t.techSpecsPage.table.warranty,   wall: t.techSpecsPage.table.values.wall.warranty,   roofing: t.techSpecsPage.table.values.roofing.warranty,   cold: t.techSpecsPage.table.values.coldStorage.warranty },
+];
+
+const downloads = [
+  { icon: FileText, ...t.techSpecsPage.downloads.items.dataSheet },
+  { icon: Box,      ...t.techSpecsPage.downloads.items.bim },
+  { icon: BookOpen, ...t.techSpecsPage.downloads.items.installation },
+  { icon: Shield,   ...t.techSpecsPage.downloads.items.certs },
+];
+---
+
+<BaseLayout t={t} lang={lang}>
+  <Navbar t={t} lang={lang} />
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="page-hero__accent" aria-hidden="true"></div>
+    <div class="page-hero__inner">
+      <ScrollReveal variant="fade-up">
+        <div class="page-hero__badge">{t.techSpecsPage.hero.badge}</div>
+        <h1 class="page-hero__title">
+          {t.techSpecsPage.hero.title}
+          <span class="page-hero__highlight">{t.techSpecsPage.hero.titleHighlight}</span>
+        </h1>
+        <p class="page-hero__description">{t.techSpecsPage.hero.description}</p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Table -->
+  <section class="specs">
+    <div class="specs__inner">
+      <ScrollReveal variant="fade-up">
+        <h2 class="specs__title">
+          {t.techSpecsPage.table.title}
+          <span class="specs__highlight">{t.techSpecsPage.table.titleHighlight}</span>
+        </h2>
+        <p class="specs__subtitle">{t.techSpecsPage.table.subtitle}</p>
+      </ScrollReveal>
+
+      <ScrollReveal variant="fade-up" delay={1}>
+        <div class="specs__table-wrapper">
+          <table class="specs__table">
+            <thead>
+              <tr>
+                <th>{t.techSpecsPage.table.spec}</th>
+                <th>{t.solutionsPage.wall.title}</th>
+                <th>{t.solutionsPage.roofing.title}</th>
+                <th>{t.solutionsPage.coldStorage.title}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableRows.map((row) => (
+                <tr>
+                  <td class="specs__feature">{row.spec}</td>
+                  <td>{row.wall}</td>
+                  <td>{row.roofing}</td>
+                  <td>{row.cold}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Downloads -->
+  <section class="downloads">
+    <div class="downloads__inner">
+      <ScrollReveal variant="fade-up">
+        <h2 class="downloads__title">
+          {t.techSpecsPage.downloads.title}
+          <span class="downloads__highlight">{t.techSpecsPage.downloads.titleHighlight}</span>
+        </h2>
+        <p class="downloads__subtitle">{t.techSpecsPage.downloads.subtitle}</p>
+      </ScrollReveal>
+
+      <div class="downloads__grid">
+        {downloads.map(({ icon: Icon, title, description }, i) => (
+          <ScrollReveal variant="fade-up" delay={(i % 3) as 0 | 1 | 2}>
+            <div class="download-card">
+              <div class="download-card__icon">
+                <Icon size={28} />
+              </div>
+              <div class="download-card__content">
+                <h3 class="download-card__title">{title}</h3>
+                <p class="download-card__description">{description}</p>
+              </div>
+              <a href="#" class="download-card__btn">
+                ↓ {t.techSpecsPage.downloads.button}
+              </a>
+            </div>
+          </ScrollReveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaSection t={t} lang={lang} />
+
+  <Footer t={t} lang={lang} />
+
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .page-hero {
+    background-color: var(--color-black);
+    padding: 6rem 1rem 5rem;
+    border-bottom: 4px solid var(--color-yellow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-hero__accent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30%;
+    background-color: var(--color-yellow);
+    transform: skewX(12deg) translateX(5rem);
+    opacity: 0.08;
+    pointer-events: none;
+  }
+
+  @media (min-width: 768px) {
+    .page-hero__accent {
+      opacity: 1;
+    }
+  }
+
+  .page-hero__inner {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    position: relative;
+    z-index: 1;
+    max-width: 48rem;
+  }
+
+  .page-hero__badge {
+    display: inline-block;
+    background-color: var(--color-yellow);
+    color: var(--color-black);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 0.35rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-hero__title {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    color: var(--color-white);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-hero__highlight {
+    color: var(--color-yellow);
+  }
+
+  .page-hero__description {
+    color: var(--color-gray-300);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 40rem;
+  }
+
+  /* Specs Table */
+  .specs {
+    padding: 6rem 1rem;
+    background-color: var(--color-white);
+  }
+
+  .specs__inner {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .specs__title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .specs__highlight {
+    background-color: var(--color-black);
+    color: var(--color-yellow);
+    padding: 0 0.4rem;
+  }
+
+  .specs__subtitle {
+    color: var(--color-gray-600);
+    font-size: 1rem;
+  }
+
+  .specs__table-wrapper {
+    overflow-x: auto;
+    border: 2px solid var(--color-gray-200);
+  }
+
+  .specs__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .specs__table thead tr {
+    background-color: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .specs__table th {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .specs__table th:first-child {
+    color: var(--color-yellow);
+  }
+
+  .specs__table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-gray-200);
+    color: var(--color-gray-600);
+    white-space: nowrap;
+  }
+
+  .specs__feature {
+    font-weight: 700;
+    color: var(--color-black) !important;
+  }
+
+  .specs__table tbody tr:nth-child(even) {
+    background-color: var(--color-gray-100);
+  }
+
+  .specs__table tbody tr:hover {
+    background-color: #fffbea;
+  }
+
+  /* Downloads */
+  .downloads {
+    background-color: var(--color-gray-100);
+    padding: 6rem 1rem;
+    border-top: 1px solid var(--color-gray-200);
+  }
+
+  .downloads__inner {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .downloads__title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .downloads__highlight {
+    background-color: var(--color-black);
+    color: var(--color-yellow);
+    padding: 0 0.4rem;
+  }
+
+  .downloads__subtitle {
+    color: var(--color-gray-600);
+    font-size: 1rem;
+  }
+
+  .downloads__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .downloads__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .downloads__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .download-card {
+    background-color: var(--color-white);
+    border: 2px solid var(--color-gray-200);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .download-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-yellow);
+  }
+
+  .download-card__icon {
+    background-color: var(--color-black);
+    color: var(--color-yellow);
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .download-card__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .download-card__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-black);
+  }
+
+  .download-card__description {
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+    line-height: 1.6;
+  }
+
+  .download-card__btn {
+    display: inline-block;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.6rem 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: var(--transition);
+    text-align: center;
+  }
+
+  .download-card__btn:hover {
+    background-color: var(--color-yellow);
+    color: var(--color-black);
+  }
+</style>
