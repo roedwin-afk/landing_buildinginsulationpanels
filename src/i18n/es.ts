@@ -6,6 +6,7 @@ export const es: TranslationKeys = {
     performance: "Rendimiento",
     techSpecs: "Especificaciones",
     getQuote: "Cotizar",
+    blog: "Blog",
   },
   hero: {
     badge: "Protección de Grado Industrial",
@@ -282,4 +283,13 @@ export const es: TranslationKeys = {
       button: "Hablar con un Ingeniero",
     },
   },
+    blog: {
+        tagline: "Perspectivas del Sector",
+        title_line1: "Conocimiento",
+        title_line2: "Técnico",
+        description: "Guías de ingeniería, mejores prácticas de instalación y noticias del sector para profesionales del aislamiento de piso industrial.",
+        btncta: "Leer Más",
+        btn_prev: "Anterior",
+        btn_next: "Siguiente",
+    },
 };

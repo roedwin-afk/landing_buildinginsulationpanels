@@ -1,0 +1,193 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import Navbar from "../../../../components/layout/Navbar.astro";
+import Footer from "../../../../components/layout/Footer.astro";
+import BlogList from "../../../../components/sections/BlogList.astro";
+import { MOCK_POSTS_ES } from "../../../../data/posts_es";
+
+import { es } from "../../../../i18n/es";
+
+export async function getStaticPaths() {
+  const POSTS_PER_PAGE = 5;
+  const allPosts = MOCK_POSTS_ES;
+  const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: String(i + 1) },
+    props: {
+      posts: allPosts.slice(i * POSTS_PER_PAGE, (i + 1) * POSTS_PER_PAGE),
+      currentPage: i + 1,
+      totalPages,
+    },
+  }));
+}
+
+const { posts, currentPage, totalPages } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+
+const t = es;
+const lang = "es";
+const locale = Astro.currentLocale ?? 'es';
+const basePath = `${base}es/blog/page/`;
+---
+
+<BaseLayout 
+  t={t} 
+  lang={lang}
+>
+  <Navbar t={t} lang={lang} />
+
+  <BlogList
+    posts={posts}
+    currentPage={currentPage}
+    totalPages={totalPages}
+    basePath={basePath}
+    t={t}
+    locale={locale}
+  />
+
+  <Footer t={t} lang={lang} />
+</BaseLayout>
+
+<style>
+  .blog {
+    padding: 4rem 2rem;
+    background-color: #f8f9fa;
+  }
+
+  .blog__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .blog__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .blog__title {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .blog__description {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  .blog__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .blog-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .blog-card__image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .blog-card__content {
+    padding: 1.5rem;
+  }
+
+  .blog-card__date {
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-card__title {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-card__title a {
+    color: var(--color-primary);
+  }
+
+  .blog-card__description {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .blog-card__link {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .pagination__btn {
+    padding: 0.6rem 1.2rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 6px;
+    color: var(--color-primary);
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .pagination__btn:hover {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .pagination__pages {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .pagination__page {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    color: var(--color-primary);
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .pagination__page:hover {
+    border-color: var(--color-primary);
+  }
+
+  .pagination__page.active {
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 900px) {
+    .blog__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .blog__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

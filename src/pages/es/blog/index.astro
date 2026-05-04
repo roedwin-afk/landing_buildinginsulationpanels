@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/layout/Navbar.astro";
+import Footer from "../../../components/layout/Footer.astro";
+import BlogList from "../../../components/sections/BlogList.astro";
+import { MOCK_POSTS_ES } from "../../../data/posts_es";
+
+import { getLang, useTranslations } from '../../../i18n/utils';
+const lang = getLang(Astro.url, import.meta.env.BASE_URL);
+const t = useTranslations(lang);
+
+
+const POSTS_PER_PAGE = 5;
+const allPosts = MOCK_POSTS_ES;
+const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+const posts = allPosts.slice(0, POSTS_PER_PAGE);
+
+const base = import.meta.env.BASE_URL;
+
+const locale = Astro.currentLocale ?? 'es';
+const basePath = locale === 'es' ? `${base}es/blog/page/` : `${base}blog/page/`;
+---
+
+<BaseLayout 
+  t={t} 
+  lang={lang}
+>
+  <Nav t={t} lang={lang} />
+  <BlogList
+    posts={posts}
+    currentPage={1}
+    totalPages={totalPages}
+    basePath={basePath}
+    t={t}
+    locale={locale}
+  />
+  <Footer t={t} lang={lang} />
+</BaseLayout>

@@ -4,6 +4,7 @@ export const en = {
     performance: "Performance",
     techSpecs: "Tech Specs",
     getQuote: "Get Quote",
+    blog: "Blog",
   },
   hero: {
     badge: "Industrial Grade Protection",
@@ -279,6 +280,15 @@ export const en = {
       description: "Our engineering team provides full BIM support and custom technical documentation for your project.",
       button: "Talk to an Engineer",
     },
+  },
+  blog: {
+    tagline: "Industry Insights",
+    title_line1: "Technical",
+    title_line2: "Knowledge",
+    description: "Engineering guides, installation best practices, and industry news for industrial floor insulation professionals.",
+    btncta: "Read More",
+    btn_prev: "Previous",
+    btn_next: "Next",
   },
 
 } as const;
