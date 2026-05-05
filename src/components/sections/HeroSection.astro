@@ -1,7 +1,6 @@
 ---
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
-import ScrollReveal from "../ui/ScrollReveal.astro";
 
 interface Props {
   t: TranslationKeys;
@@ -14,53 +13,344 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
 ---
 
 <header class="hero">
-  <div class="container hero__inner">
-    <div class="hero__content">
-      <div class="hero__badge">{t.hero.badge}</div>
-      <h1 class="hero__title">
-        {t.hero.titleSpeed}
-        <span class="hero__highlight">{t.hero.titleSpeedHighlight}</span>
-        <br />
-        {t.hero.titleStrength}
-        <span class="hero__highlight">{t.hero.titleStrengthHighlight}</span>
-      </h1>
-      <p class="hero__description">{t.hero.description}</p>
-      <ScrollReveal variant="fade-left" delay={1}>
-      <div class="hero__actions">
-        <a href={`${langPrefix}/#contact`} class="btn-primary">
-          {t.hero.ctaPrimary}
-        </a>
-        <a href={`${langPrefix}/#solutions`} class="btn-outline">
-          {t.hero.ctaSecondary}
-        </a>
+
+  <!-- Slide 1: Original — Speed & Strength -->
+  <div class="hero__slide hero__slide--1 is-active">
+    <div class="hero__slide-bg hero__slide-bg--1" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="hero__badge">{t.hero.badge}</div>
+        <h1 class="hero__title">
+          {t.hero.titleSpeed}
+          <span class="hero__highlight">{t.hero.titleSpeedHighlight}</span>
+          <br />
+          {t.hero.titleStrength}
+          <span class="hero__highlight">{t.hero.titleStrengthHighlight}</span>
+        </h1>
+        <p class="hero__description">{t.hero.description}</p>
+        <div class="hero__actions">
+          <a href={`${langPrefix}/#contact`} class="btn-primary">{t.hero.ctaPrimary}</a>
+          <a href={`${langPrefix}/#solutions`} class="btn-outline">{t.hero.ctaSecondary}</a>
+        </div>
       </div>
-      </ScrollReveal>
     </div>
   </div>
+
+  <!-- Slide 2: Solutions -->
+  <div class="hero__slide hero__slide--2">
+    <div class="hero__slide-bg hero__slide-bg--2" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="hero__badge">{t.solutionsPage.hero.badge}</div>
+        <h2 class="hero__title">
+          {t.solutionsPage.hero.title}
+          <span class="hero__highlight">{t.solutionsPage.hero.titleHighlight}</span>
+        </h2>
+        <p class="hero__description">{t.solutionsPage.hero.description}</p>
+        <div class="hero__actions">
+          <a href={`${langPrefix}/solutions/`} class="btn-primary">{t.solutionsPage.cta.titleHighlight}</a>
+          <a href={`${langPrefix}/#contact`} class="btn-outline">{t.hero.ctaPrimary}</a>
+        </div>
+        <!-- Floating specs -->
+        <div class="hero__specs">
+          <div class="hero__spec">
+            <span class="hero__spec-value">Class A</span>
+            <span class="hero__spec-label">{t.solutionsPage.comparison.fireRating}</span>
+          </div>
+          <div class="hero__spec">
+            <span class="hero__spec-value">200mm</span>
+            <span class="hero__spec-label">{t.solutionsPage.comparison.maxThickness}</span>
+          </div>
+          <div class="hero__spec">
+            <span class="hero__spec-value">25yr</span>
+            <span class="hero__spec-label">{t.solutionsPage.comparison.warranty}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: Performance -->
+  <div class="hero__slide hero__slide--3">
+    <div class="hero__slide-bg hero__slide-bg--3" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="hero__badge">{t.performancePage.hero.badge}</div>
+        <h2 class="hero__title">
+          {t.performancePage.hero.title}
+          <span class="hero__highlight">{t.performancePage.hero.titleHighlight}</span>
+        </h2>
+        <p class="hero__description">{t.performancePage.hero.description}</p>
+        <div class="hero__actions">
+          <a href={`${langPrefix}/performance/`} class="btn-primary">{t.performancePage.cta.button}</a>
+          <a href={`${langPrefix}/#contact`} class="btn-outline">{t.hero.ctaPrimary}</a>
+        </div>
+        <!-- Stats row -->
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-value">40%</span>
+            <span class="hero__stat-label">{t.performancePage.stats.items.faster.label}</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">R-30+</span>
+            <span class="hero__stat-label">{t.performancePage.stats.items.rValue.label}</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-value">25yr</span>
+            <span class="hero__stat-label">{t.performancePage.stats.items.lifespan.label}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Tech Specs -->
+  <div class="hero__slide hero__slide--4">
+    <div class="hero__slide-bg hero__slide-bg--4" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="hero__badge">{t.techSpecsPage.hero.badge}</div>
+        <h2 class="hero__title">
+          {t.techSpecsPage.hero.title}
+          <span class="hero__highlight">{t.techSpecsPage.hero.titleHighlight}</span>
+        </h2>
+        <p class="hero__description">{t.techSpecsPage.hero.description}</p>
+        <div class="hero__actions">
+          <a href={`${langPrefix}/tech-specs/`} class="btn-primary">{t.techSpecsPage.cta.button}</a>
+          <a href={`${langPrefix}/#contact`} class="btn-outline">{t.hero.ctaPrimary}</a>
+        </div>
+        <!-- Mini table preview -->
+        <div class="hero__table">
+          <div class="hero__table-row hero__table-row--head">
+            <span></span>
+            <span>{t.solutionsPage.wall.title}</span>
+            <span>{t.solutionsPage.roofing.title}</span>
+            <span>{t.solutionsPage.coldStorage.title}</span>
+          </div>
+          <div class="hero__table-row">
+            <span>{t.techSpecsPage.table.rValue}</span>
+            <span>R-15</span>
+            <span>R-20</span>
+            <span>R-30+</span>
+          </div>
+          <div class="hero__table-row">
+            <span>{t.techSpecsPage.table.fireRating}</span>
+            <span>A</span>
+            <span>A</span>
+            <span>A</span>
+          </div>
+          <div class="hero__table-row">
+            <span>{t.techSpecsPage.table.warranty}</span>
+            <span>20yr</span>
+            <span>25yr</span>
+            <span>25yr</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dots -->
+  <div class="hero__dots" aria-label="Carousel navigation">
+    <button class="hero__dot is-active" data-index="0" aria-label="Slide 1"></button>
+    <button class="hero__dot" data-index="1" aria-label="Slide 2"></button>
+    <button class="hero__dot" data-index="2" aria-label="Slide 3"></button>
+    <button class="hero__dot" data-index="3" aria-label="Slide 4"></button>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="hero__progress" aria-hidden="true">
+    <div class="hero__progress-bar"></div>
+  </div>
+
   <div class="hero__bar"></div>
 </header>
 
+<script>
+  function initCarousel() {
+    const slides = document.querySelectorAll<HTMLElement>(".hero__slide");
+    const dots = document.querySelectorAll<HTMLButtonElement>(".hero__dot");
+    const progressBar = document.querySelector<HTMLElement>(".hero__progress-bar");
+
+    if (!slides.length) return;
+
+    let current = 0;
+    let timer: ReturnType<typeof setInterval>;
+    const DURATION = 15000;
+
+    function goTo(index: number) {
+      slides[current].classList.remove("is-active");
+      dots[current].classList.remove("is-active");
+      current = index % slides.length;
+      slides[current].classList.add("is-active");
+      dots[current].classList.add("is-active");
+      resetProgress();
+    }
+
+    function next() {
+      goTo((current + 1) % slides.length);
+    }
+
+    function resetProgress() {
+      if (!progressBar) return;
+      progressBar.style.transition = "none";
+      progressBar.style.width = "0%";
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          progressBar.style.transition = `width ${DURATION}ms linear`;
+          progressBar.style.width = "100%";
+        });
+      });
+    }
+
+    function startTimer() {
+      timer = setInterval(next, DURATION);
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        stopTimer();
+        goTo(i);
+        startTimer();
+      });
+    });
+
+    resetProgress();
+    startTimer();
+  }
+
+  initCarousel();
+  document.addEventListener("astro:page-load", initCarousel);
+</script>
+
 <style>
+  /* ── Base ── */
   .hero {
     position: relative;
     min-height: 85vh;
-    display: flex;
-    align-items: center;
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-      url("https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=2000")
-        center / cover no-repeat;
+    overflow: hidden;
     color: var(--color-white);
+    isolation: isolate;
   }
 
-  .hero__inner {
+  /* ── Slides ── */
+  .hero__slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    pointer-events: none;
+    z-index: 0;
+    visibility: hidden;
+  }
+
+  .hero__slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+    visibility: visible;
+  }
+
+  /* ── Backgrounds ── */
+  .hero__slide-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* Slide 1 — photo */
+  .hero__slide-bg--1 {
+    background:
+      linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+      url("https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=2000")
+      center / cover no-repeat;
+  }
+
+  /* Slide 2 — Solutions: dark + yellow diagonal left */
+  .hero__slide-bg--2 {
+    background-color: #111;
+  }
+
+  .hero__slide-bg--2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-yellow) 0%, var(--color-yellow) 35%, transparent 35%);
+    opacity: 0.08;
+  }
+
+  .hero__slide-bg--2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    background-color: var(--color-yellow);
+  }
+
+  /* Slide 3 — Performance: dark with diagonal stripes */
+  .hero__slide-bg--3 {
+    background-color: #0f0f0f;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255, 215, 0, 0.03) 40px,
+      rgba(255, 215, 0, 0.03) 80px
+    );
+  }
+
+  .hero__slide-bg--3::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(to left, rgba(255,215,0,0.06), transparent);
+  }
+
+  /* Slide 4 — Tech Specs: dark grid pattern */
+  .hero__slide-bg--4 {
+    background-color: #111;
+    background-image:
+      linear-gradient(rgba(255,215,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,215,0,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .hero__slide-bg--4::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    height: 4px;
+    background: linear-gradient(to right, var(--color-yellow), transparent);
+  }
+
+  /* ── Content ── */
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding: 5rem 1.5rem;
   }
 
   .hero__content {
     max-width: 48rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
   }
 
   .hero__badge {
@@ -68,19 +358,19 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
     background-color: var(--color-yellow);
     color: var(--color-black);
     font-family: var(--font-heading);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     padding: 0.25rem 1rem;
-    margin-bottom: 1.5rem;
+    align-self: flex-start;
   }
 
   .hero__title {
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(2.75rem, 8vw, 5.5rem);
     font-weight: 800;
     line-height: 1;
-    margin-bottom: 1.5rem;
+    margin: 0;
   }
 
   .hero__highlight {
@@ -88,25 +378,201 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
   }
 
   .hero__description {
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
     color: #d1d5db;
-    max-width: 40rem;
-    margin-bottom: 2.5rem;
-    line-height: 1.6;
+    max-width: 38rem;
+    line-height: 1.65;
+    margin: 0;
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    margin-top: 0.5rem;
   }
 
+  /* ── Slide 2: Specs row ── */
+  .hero__specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .hero__spec {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .hero__spec-value {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-yellow);
+    line-height: 1;
+  }
+
+  .hero__spec-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gray-400);
+  }
+
+  /* ── Slide 3: Stats row ── */
+  .hero__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .hero__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    border-left: 3px solid var(--color-yellow);
+    padding-left: 0.75rem;
+  }
+
+  .hero__stat-value {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-yellow);
+    line-height: 1;
+  }
+
+  .hero__stat-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gray-400);
+  }
+
+  /* ── Slide 4: Mini table ── */
+  .hero__table {
+    margin-top: 1.5rem;
+    border: 1px solid rgba(255,215,0,0.2);
+    overflow: hidden;
+    max-width: 32rem;
+  }
+
+  .hero__table-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    border-bottom: 1px solid rgba(255,215,0,0.1);
+  }
+
+  .hero__table-row:last-child {
+    border-bottom: none;
+  }
+
+  .hero__table-row span {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-gray-300);
+    border-right: 1px solid rgba(255,215,0,0.1);
+  }
+
+  .hero__table-row span:last-child {
+    border-right: none;
+  }
+
+  .hero__table-row span:first-child {
+    color: var(--color-gray-400);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .hero__table-row--head span {
+    background-color: rgba(255,215,0,0.08);
+    color: var(--color-yellow);
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Dots ── */
+  .hero__dots {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 2rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+  }
+
+  .hero__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.4);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .hero__dot.is-active {
+    background-color: var(--color-yellow);
+    border-color: var(--color-yellow);
+    width: 1.5rem;
+    border-radius: 4px;
+  }
+
+  /* ── Progress bar ── */
+  .hero__progress {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255,255,255,0.1);
+    z-index: 10;
+  }
+
+  .hero__progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--color-yellow);
+  }
+
+  /* ── Bottom bar ── */
   .hero__bar {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 1rem;
+    height: 0.5rem;
     background-color: var(--color-yellow);
+    z-index: 11;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 640px) {
+    .hero__table {
+      display: none;
+    }
+
+    .hero__stats,
+    .hero__specs {
+      gap: 1rem;
+    }
+
+    .hero__stat-value {
+      font-size: 1.5rem;
+    }
   }
 </style>
