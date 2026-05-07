@@ -40,7 +40,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
     <!-- Desktop Links -->
     <div class="navbar__desktop">
       <NavLinks t={t} lang={lang} variant="navbar" />
-      <a href={`${base}/#contact`} class="btn-primary navbar__cta">
+      <a href={`${langPrefix}/#contact`} class="btn-primary navbar__cta">
         {t.nav.getQuote}
       </a>
     </div>
