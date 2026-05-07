@@ -23,11 +23,11 @@ const LNG = -99.1946;
     <div class="map-section__info">
       <div class="map-section__badge">
         <MapPin size={16} />
-        <span>Headquarters</span>
+        <span>{t.mapSection.badge}</span>
       </div>
 
       <h2 class="map-section__title">
-        Find Us <span class="map-section__title-highlight">Here</span>
+        {t.mapSection.title_line1} <span class="map-section__title-highlight">{t.mapSection.title_line2}</span>
       </h2>
 
       <p class="map-section__address">{t.contact.address.value}</p>
@@ -48,7 +48,7 @@ const LNG = -99.1946;
       </div>
 
       <a href="#contact" class="btn-primary map-section__cta">
-        Get a Quote →
+        {t.mapSection.cta}
       </a>
     </div>
     </ScrollReveal>

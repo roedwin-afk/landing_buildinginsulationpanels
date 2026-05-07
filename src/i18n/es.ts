@@ -84,7 +84,7 @@ export const es: TranslationKeys = {
       "Envíanos los planos o requisitos de tu proyecto. Nuestro equipo técnico te proporcionará una cotización completa y un plan de instalación en 24 horas.",
     phone: {
       label: "Línea Directa",
-      value: "+1 (800) 555-PANEL",
+      value: "+52 55 9990 3546",
     },
     email: {
       label: "Consultas por Email",
@@ -92,7 +92,7 @@ export const es: TranslationKeys = {
     },
     address: {
       label: "Sede Central",
-      value: "Distrito Industrial, Edificio 7, Houston, TX",
+      value: "Avenida Presidente Masaryk No. 61, Int. 901, Polanco V Sección, C.P. 11560, Miguel Hidalgo, Mexico City, Mexico",
     },
     form: {
       name: "Nombre Completo",
@@ -283,13 +283,19 @@ export const es: TranslationKeys = {
       button: "Hablar con un Ingeniero",
     },
   },
-    blog: {
-        tagline: "Perspectivas del Sector",
-        title_line1: "Conocimiento",
-        title_line2: "Técnico",
-        description: "Guías de ingeniería, mejores prácticas de instalación y noticias del sector para profesionales del aislamiento de piso industrial.",
-        btncta: "Leer Más",
-        btn_prev: "Anterior",
-        btn_next: "Siguiente",
-    },
+  blog: {
+    tagline: "Perspectivas del Sector",
+    title_line1: "Conocimiento",
+    title_line2: "Técnico",
+    description: "Guías de ingeniería, mejores prácticas de instalación y noticias del sector para profesionales del aislamiento de piso industrial.",
+    btncta: "Leer Más",
+    btn_prev: "Anterior",
+    btn_next: "Siguiente",
+  },
+  mapSection: {
+    badge: "Sede",
+    title_line1: "Encuéntranos",
+    title_line2: "Aquí",
+    cta: "Obtener presupuesto →",
+  },
 };

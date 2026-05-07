@@ -290,6 +290,12 @@ export const en = {
     btn_prev: "Previous",
     btn_next: "Next",
   },
+  mapSection: {
+    badge: "Headquarters",
+    title_line1: "Find Us",
+    title_line2: "Here",
+    cta: "Get a Quote →",
+  },
 
 } as const;
 
