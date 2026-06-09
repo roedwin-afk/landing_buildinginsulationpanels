@@ -1,38 +1,45 @@
 ---
+import { BlogList } from "astro-blog-kit/components";
+import { createWPClient } from "astro-blog-kit/utils";
+import config from "../../../../blog.config";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import Nav from "../../../components/layout/Navbar.astro";
+import Navbar from "../../../components/layout/Navbar.astro";
 import Footer from "../../../components/layout/Footer.astro";
-import BlogList from "../../../components/sections/BlogList.astro";
-import { MOCK_POSTS_ES } from "../../../data/posts_es";
 
-import { getLang, useTranslations } from '../../../i18n/utils';
-const lang = getLang(Astro.url, import.meta.env.BASE_URL);
-const t = useTranslations(lang);
+import { getLang, useTranslations } from "../../../i18n/utils";
 
+const wp = createWPClient(config.wpUrl);
+const { posts, totalPages } = await wp.getPosts({ perPage: config.postsPerPage ?? 5 });
 
-const POSTS_PER_PAGE = 5;
-const allPosts = MOCK_POSTS_ES;
-const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
-const posts = allPosts.slice(0, POSTS_PER_PAGE);
+const bt = {
+  blog: {
+    tagline: "Nuestro Blog",
+    title_line1: "Últimos",
+    title_line2: "Artículos",
+    description: "Bienvenido a nuestro blog.",
+    btncta: "Leer más",
+    btn_prev: "Anterior",
+    btn_next: "Siguiente",
+  },
+};
 
 const base = import.meta.env.BASE_URL;
-
-const locale = Astro.currentLocale ?? 'es';
-const basePath = locale === 'es' ? `${base}es/blog/page/` : `${base}blog/page/`;
+const lang = getLang(Astro.url, import.meta.env.BASE_URL);
+const t = useTranslations(lang);
 ---
 
-<BaseLayout 
-  t={t} 
-  lang={lang}
->
-  <Nav t={t} lang={lang} />
+<BaseLayout t={t} lang={lang}>
+  <Navbar t={t} lang={lang} />
   <BlogList
     posts={posts}
     currentPage={1}
     totalPages={totalPages}
-    basePath={basePath}
-    t={t}
-    locale={locale}
+    basePath={`${base}blog/page/`}
+    blogBase={`${base}blog/`}
+    dateLocale={config.locale ?? "en"}
+    t={bt}
+    locale={config.locale ?? "en"}
+    layout={config.defaultLayout ?? "magazine"}
   />
   <Footer t={t} lang={lang} />
 </BaseLayout>

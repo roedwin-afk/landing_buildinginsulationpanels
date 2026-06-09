@@ -15,6 +15,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const products = [
     {
         icon: Layers,
+        img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+        imgAlt: t.solutions.wall.title,
         title: t.solutions.wall.title,
         description: t.solutions.wall.description,
         specs: [t.solutions.wall.spec1, t.solutions.wall.spec2],
@@ -22,11 +24,15 @@ const products = [
     {
         icon: Home,
         title: t.solutions.roofing.title,
+        img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
+        imgAlt: t.solutions.roofing.title,
         description: t.solutions.roofing.description,
         specs: [t.solutions.roofing.spec1, t.solutions.roofing.spec2],
     },
     {
         icon: Grid,
+        img: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=800&q=80",
+        imgAlt: t.solutions.coldStorage.title,
         title: t.solutions.coldStorage.title,
         description: t.solutions.coldStorage.description,
         specs: [t.solutions.coldStorage.spec1, t.solutions.coldStorage.spec2],
@@ -48,39 +54,57 @@ const delays = [1, 2, 3] as const;
                 </h2>
                 <p class="solutions__subtitle">{t.solutions.subtitle}</p>
             </div>
-            <a href={`${base}/catalog.pdf`} class="solutions__download">
+            <!-- <a href={`${base}/catalog.pdf`} class="solutions__download">
                 ↓ {t.solutions.downloadCatalog}
-            </a>
+            </a> -->
         </div>
 
         <div class="solutions__grid">
             {
-                products.map(({ icon: Icon, title, description, specs }, i) => (
-                    <ScrollReveal variant="fade-down" delay={delays[i]}>
-                        <article class="solution-card">
-                            <div class="solution-card__image">
-                                <Icon size={64} />
-                            </div>
-                            <h3 class="solution-card__title">{title}</h3>
-                            <p class="solution-card__description">
-                                {description}
-                            </p>
-                            <ul class="solution-card__specs">
-                                {specs.map((spec) => (
-                                    <li class="solution-card__spec">
-                                        <span class="solution-card__check">
-                                            ✓
-                                        </span>
-                                        {spec}
-                                    </li>
-                                ))}
-                            </ul>
-                            <a href={`#contact`} class="solution-card__link">
-                                {t.solutions.learnMore} →
-                            </a>
-                        </article>
-                    </ScrollReveal>
-                ))
+                products.map(
+                    (
+                        { icon: Icon, title, description, specs, img, imgAlt },
+                        i,
+                    ) => (
+                        <ScrollReveal variant="fade-down" delay={delays[i]}>
+                            <article class="solution-card">
+                                <div class="solution-card__image">
+                                    <img
+                                        src={img}
+                                        alt={imgAlt}
+                                        loading="lazy"
+                                    />
+                                    <div
+                                        class="solution-card__image-overlay"
+                                        aria-hidden="true"
+                                    >
+                                        <Icon size={32} />
+                                    </div>
+                                </div>
+                                <h3 class="solution-card__title">{title}</h3>
+                                <p class="solution-card__description">
+                                    {description}
+                                </p>
+                                <ul class="solution-card__specs">
+                                    {specs.map((spec) => (
+                                        <li class="solution-card__spec">
+                                            <span class="solution-card__check">
+                                                ✓
+                                            </span>
+                                            {spec}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <a
+                                    href={`#contact`}
+                                    class="solution-card__link"
+                                >
+                                    {t.solutions.learnMore} →
+                                </a>
+                            </article>
+                        </ScrollReveal>
+                    ),
+                )
             }
         </div>
     </div>
@@ -195,12 +219,37 @@ const delays = [1, 2, 3] as const;
     }
 
     .solution-card__image {
-        background-color: var(--color-gray-100);
         height: 12rem;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .solution-card__image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+        filter: grayscale(30%);
+    }
+
+    .solution-card:hover .solution-card__image img {
+        transform: scale(1.05);
+        filter: grayscale(0%);
+    }
+
+    .solution-card__image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.55) 0%,
+            transparent 60%
+        );
         display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--color-gray-300);
+        align-items: flex-end;
+        padding: 0.75rem;
+        color: var(--color-yellow);
     }
 
     .solution-card__title {

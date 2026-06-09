@@ -13,7 +13,6 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
 ---
 
 <header class="hero">
-
   <!-- Slide 1: Original — Speed & Strength -->
   <div class="hero__slide hero__slide--1 is-active">
     <div class="hero__slide-bg hero__slide-bg--1" aria-hidden="true"></div>
@@ -29,8 +28,12 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
         </h1>
         <p class="hero__description">{t.hero.description}</p>
         <div class="hero__actions">
-          <a href={`${langPrefix}/#contact`} class="btn-primary">{t.hero.ctaPrimary}</a>
-          <a href={`${langPrefix}/solutions`} class="btn-outline">{t.hero.ctaSecondary}</a>
+          <a href={`${langPrefix}/#contact`} class="btn-primary"
+            >{t.hero.ctaPrimary}</a
+          >
+          <a href={`${langPrefix}/solutions`} class="btn-outline"
+            >{t.hero.ctaSecondary}</a
+          >
         </div>
       </div>
     </div>
@@ -44,26 +47,38 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
         <div class="hero__badge">{t.solutionsPage.hero.badge}</div>
         <h2 class="hero__title">
           {t.solutionsPage.hero.title}
-          <span class="hero__highlight">{t.solutionsPage.hero.titleHighlight}</span>
+          <span class="hero__highlight"
+            >{t.solutionsPage.hero.titleHighlight}</span
+          >
         </h2>
         <p class="hero__description">{t.solutionsPage.hero.description}</p>
         <div class="hero__actions">
-          <a href={`${langPrefix}/solutions/`} class="btn-primary">{t.solutionsPage.cta.titleHighlight}</a>
-          <a href={`${langPrefix}/#contact`} class="btn-outline">{t.hero.ctaPrimary}</a>
+          <a href={`${langPrefix}/solutions/`} class="btn-primary"
+            >{t.solutionsPage.cta.titleHighlight}</a
+          >
+          <a href={`${langPrefix}/#contact`} class="btn-outline"
+            >{t.hero.ctaPrimary}</a
+          >
         </div>
         <!-- Floating specs -->
         <div class="hero__specs">
           <div class="hero__spec">
-            <span class="hero__spec-value">Class A</span>
-            <span class="hero__spec-label">{t.solutionsPage.comparison.fireRating}</span>
+            <span class="hero__spec-value">{lang === "es" ? "Clase A" : "Class A"}</span>
+            <span class="hero__spec-label"
+              >{t.solutionsPage.comparison.fireRating}</span
+            >
           </div>
           <div class="hero__spec">
             <span class="hero__spec-value">200mm</span>
-            <span class="hero__spec-label">{t.solutionsPage.comparison.maxThickness}</span>
+            <span class="hero__spec-label"
+              >{t.solutionsPage.comparison.maxThickness}</span
+            >
           </div>
           <div class="hero__spec">
-            <span class="hero__spec-value">25yr</span>
-            <span class="hero__spec-label">{t.solutionsPage.comparison.warranty}</span>
+            <span class="hero__spec-value">{lang === "es" ? "25 años" : "25 yrs"}</span>
+            <span class="hero__spec-label"
+              >{t.solutionsPage.comparison.warranty}</span
+            >
           </div>
         </div>
       </div>
@@ -78,26 +93,38 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
         <div class="hero__badge">{t.performancePage.hero.badge}</div>
         <h2 class="hero__title">
           {t.performancePage.hero.title}
-          <span class="hero__highlight">{t.performancePage.hero.titleHighlight}</span>
+          <span class="hero__highlight"
+            >{t.performancePage.hero.titleHighlight}</span
+          >
         </h2>
         <p class="hero__description">{t.performancePage.hero.description}</p>
         <div class="hero__actions">
-          <a href={`${langPrefix}/performance/`} class="btn-primary">{t.performancePage.cta.button}</a>
-          <a href={`${langPrefix}/#contact`} class="btn-outline">{t.hero.ctaPrimary}</a>
+          <a href={`${langPrefix}/performance/`} class="btn-primary"
+            >{t.performancePage.cta.button}</a
+          >
+          <a href={`${langPrefix}/#contact`} class="btn-outline"
+            >{t.hero.ctaPrimary}</a
+          >
         </div>
         <!-- Stats row -->
         <div class="hero__stats">
           <div class="hero__stat">
             <span class="hero__stat-value">40%</span>
-            <span class="hero__stat-label">{t.performancePage.stats.items.faster.label}</span>
+            <span class="hero__stat-label"
+              >{t.performancePage.stats.items.faster.label}</span
+            >
           </div>
           <div class="hero__stat">
             <span class="hero__stat-value">R-30+</span>
-            <span class="hero__stat-label">{t.performancePage.stats.items.rValue.label}</span>
+            <span class="hero__stat-label"
+              >{t.performancePage.stats.items.rValue.label}</span
+            >
           </div>
           <div class="hero__stat">
-            <span class="hero__stat-value">25yr</span>
-            <span class="hero__stat-label">{t.performancePage.stats.items.lifespan.label}</span>
+            <span class="hero__stat-value">{lang === "es" ? "25 años" : "25 yrs"}</span>
+            <span class="hero__stat-label"
+              >{t.performancePage.stats.items.lifespan.label}</span
+            >
           </div>
         </div>
       </div>
@@ -112,12 +139,18 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
         <div class="hero__badge">{t.techSpecsPage.hero.badge}</div>
         <h2 class="hero__title">
           {t.techSpecsPage.hero.title}
-          <span class="hero__highlight">{t.techSpecsPage.hero.titleHighlight}</span>
+          <span class="hero__highlight"
+            >{t.techSpecsPage.hero.titleHighlight}</span
+          >
         </h2>
         <p class="hero__description">{t.techSpecsPage.hero.description}</p>
         <div class="hero__actions">
-          <a href={`${langPrefix}/tech-specs/`} class="btn-primary">{t.techSpecsPage.cta.button}</a>
-          <a href={`${langPrefix}/#contact`} class="btn-outline">{t.hero.ctaPrimary}</a>
+          <a href={`${langPrefix}/tech-specs/`} class="btn-primary"
+            >{t.techSpecsPage.cta.button}</a
+          >
+          <a href={`${langPrefix}/#contact`} class="btn-outline"
+            >{t.hero.ctaPrimary}</a
+          >
         </div>
         <!-- Mini table preview -->
         <div class="hero__table">
@@ -141,9 +174,9 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
           </div>
           <div class="hero__table-row">
             <span>{t.techSpecsPage.table.warranty}</span>
-            <span>20yr</span>
-            <span>25yr</span>
-            <span>25yr</span>
+            <span>{lang === "es" ? "20 años" : "20 yrs"}</span>
+            <span>{lang === "es" ? "25 años" : "25 yrs"}</span>
+            <span>{lang === "es" ? "25 años" : "25 yrs"}</span>
           </div>
         </div>
       </div>
@@ -152,10 +185,37 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
 
   <!-- Dots -->
   <div class="hero__dots" aria-label="Carousel navigation">
-    <button class="hero__dot is-active" data-index="0" aria-label="Slide 1"></button>
+    <button class="hero__dot is-active" data-index="0" aria-label="Slide 1"
+    ></button>
     <button class="hero__dot" data-index="1" aria-label="Slide 2"></button>
     <button class="hero__dot" data-index="2" aria-label="Slide 3"></button>
     <button class="hero__dot" data-index="3" aria-label="Slide 4"></button>
+
+    <!-- Botón pause/play -->
+    <button
+      class="hero__pause"
+      aria-label="Pausar presentación"
+      aria-pressed="false"
+    >
+      <svg
+        class="icon-pause"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <rect x="3" y="2" width="4" height="12" rx="1"></rect>
+        <rect x="9" y="2" width="4" height="12" rx="1"></rect>
+      </svg>
+      <svg
+        class="icon-play"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        aria-hidden="true"
+        style="display:none"
+      >
+        <path d="M4 2l10 6-10 6V2z"></path>
+      </svg>
+    </button>
   </div>
 
   <!-- Progress bar -->
@@ -170,7 +230,9 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
   function initCarousel() {
     const slides = document.querySelectorAll<HTMLElement>(".hero__slide");
     const dots = document.querySelectorAll<HTMLButtonElement>(".hero__dot");
-    const progressBar = document.querySelector<HTMLElement>(".hero__progress-bar");
+    const progressBar = document.querySelector<HTMLElement>(
+      ".hero__progress-bar",
+    );
 
     if (!slides.length) return;
 
@@ -211,12 +273,46 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
       clearInterval(timer);
     }
 
+    const pauseBtn = document.querySelector<HTMLButtonElement>(".hero__pause");
+    let isPaused = false;
+
     dots.forEach((dot, i) => {
       dot.addEventListener("click", () => {
         stopTimer();
         goTo(i);
-        startTimer();
+        if (!isPaused) startTimer();
       });
+    });
+
+    pauseBtn?.addEventListener("click", () => {
+      isPaused = !isPaused;
+      pauseBtn.setAttribute("aria-pressed", String(isPaused));
+      pauseBtn.querySelector<SVGElement>(".icon-pause")!.style.display =
+        isPaused ? "none" : "";
+      pauseBtn.querySelector<SVGElement>(".icon-play")!.style.display = isPaused
+        ? ""
+        : "none";
+      pauseBtn.setAttribute(
+        "aria-label",
+        isPaused ? "Reanudar presentación" : "Pausar presentación",
+      );
+
+      if (isPaused) {
+        stopTimer();
+        // Congela la barra de progreso en su posición actual
+        if (progressBar) {
+          const computed = getComputedStyle(progressBar).width;
+          const parentWidth = (progressBar.parentElement as HTMLElement)
+            .offsetWidth;
+          const pct = (parseFloat(computed) / parentWidth) * 100;
+          progressBar.style.transition = "none";
+          progressBar.style.width = `${pct}%`;
+        }
+      } else {
+        // Reanuda: reinicia la barra y arranca el timer
+        resetProgress();
+        startTimer();
+      }
     });
 
     resetProgress();
@@ -267,9 +363,9 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
   /* Slide 1 — photo */
   .hero__slide-bg--1 {
     background:
-      linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+      linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
       url("https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=2000")
-      center / cover no-repeat;
+        center / cover no-repeat;
   }
 
   /* Slide 2 — Solutions: dark + yellow diagonal left */
@@ -281,7 +377,12 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, var(--color-yellow) 0%, var(--color-yellow) 35%, transparent 35%);
+    background: linear-gradient(
+      135deg,
+      var(--color-yellow) 0%,
+      var(--color-yellow) 35%,
+      transparent 35%
+    );
     opacity: 0.08;
   }
 
@@ -314,15 +415,15 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
     top: 0;
     height: 100%;
     width: 40%;
-    background: linear-gradient(to left, rgba(255,215,0,0.06), transparent);
+    background: linear-gradient(to left, rgba(255, 215, 0, 0.06), transparent);
   }
 
   /* Slide 4 — Tech Specs: dark grid pattern */
   .hero__slide-bg--4 {
     background-color: #111;
     background-image:
-      linear-gradient(rgba(255,215,0,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,215,0,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(255, 215, 0, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 215, 0, 0.04) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
@@ -399,7 +500,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
     gap: 1.5rem;
     margin-top: 1rem;
     padding-top: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .hero__spec {
@@ -431,7 +532,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
     gap: 2rem;
     margin-top: 1rem;
     padding-top: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .hero__stat {
@@ -461,7 +562,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
   /* ── Slide 4: Mini table ── */
   .hero__table {
     margin-top: 1.5rem;
-    border: 1px solid rgba(255,215,0,0.2);
+    border: 1px solid rgba(255, 215, 0, 0.2);
     overflow: hidden;
     max-width: 32rem;
   }
@@ -469,7 +570,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
   .hero__table-row {
     display: grid;
     grid-template-columns: 1.2fr 1fr 1fr 1fr;
-    border-bottom: 1px solid rgba(255,215,0,0.1);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
   }
 
   .hero__table-row:last-child {
@@ -481,7 +582,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--color-gray-300);
-    border-right: 1px solid rgba(255,215,0,0.1);
+    border-right: 1px solid rgba(255, 215, 0, 0.1);
   }
 
   .hero__table-row span:last-child {
@@ -496,7 +597,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
   }
 
   .hero__table-row--head span {
-    background-color: rgba(255,215,0,0.08);
+    background-color: rgba(255, 215, 0, 0.08);
     color: var(--color-yellow);
     font-family: var(--font-heading);
     font-size: 0.7rem;
@@ -510,6 +611,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
     bottom: 2.5rem;
     right: 2rem;
     display: flex;
+    align-items: center;
     gap: 0.5rem;
     z-index: 10;
   }
@@ -518,7 +620,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.4);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -539,7 +641,7 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     z-index: 10;
   }
 
@@ -575,4 +677,38 @@ const langPrefix = lang === "es" ? `${base}/es` : base;
       font-size: 1.5rem;
     }
   }
+
+  /* ── Pause button ── */
+.hero__pause {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  color: rgba(255,255,255,0.6);
+  padding: 0;
+  transition: border-color 0.2s, color 0.2s;
+  margin-left: 0.25rem;
+  flex-shrink: 0;
+}
+
+.hero__pause:hover {
+  border-color: var(--color-yellow);
+  color: var(--color-yellow);
+}
+
+.hero__pause svg {
+  width: 0.6rem;
+  height: 0.6rem;
+}
+
+/* Estado activo (pausado) */
+.hero__pause[aria-pressed="true"] {
+  border-color: var(--color-yellow);
+  color: var(--color-yellow);
+}
 </style>

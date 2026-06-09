@@ -1,25 +1,52 @@
 ---
 import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
 import ScrollReveal from "../ui/ScrollReveal.astro";
+import { Building2, Zap, Thermometer, ShieldCheck, Flame } from "lucide-astro";
 
 interface Props {
     t: TranslationKeys;
-    lang: string;
+    lang: Lang;
 }
 
-const { t } = Astro.props;
+const { t, lang } = Astro.props;
 
-const brands = ["GLOBALCON", "STEELCORE", "INDUS-X", "ARCHI-TECH"];
+const stats = [
+    { value: "500+", labelKey: "projectsCompleted" as const, icon: Building2 },
+    { value: "40%", labelKey: "fasterInstall" as const, icon: Zap },
+    {
+        value: lang == "es" ? "25 años" : "25yr",
+        labelKey: "warranty" as const,
+        icon: ShieldCheck,
+    },
+    {
+        value: lang == "es" ? "Clase A" : "Class A",
+        labelKey: "fireRating" as const,
+        icon: Flame,
+    },
+];
 ---
 
 <section class="trust-bar">
     <ScrollReveal variant="fade-up" delay={1}>
         <div class="trust-bar__inner">
             <p class="trust-bar__label">{t.trust.label}</p>
-            <ul class="trust-bar__brands" aria-label="Trusted companies">
+            <ul class="trust-bar__stats" aria-label="Key performance metrics">
                 {
-                    brands.map((brand) => (
-                        <li class="trust-bar__brand">{brand}</li>
+                    stats.map((stat) => (
+                        <li class="trust-bar__stat">
+                            <div class="trust-bar__icon" aria-hidden="true">
+                                <stat.icon size={36} strokeWidth={1.5} />
+                            </div>
+                            <div class="trust-bar__data">
+                                <span class="trust-bar__value">
+                                    {stat.value}
+                                </span>
+                                <span class="trust-bar__desc">
+                                    {t.trust.stats[stat.labelKey]}
+                                </span>
+                            </div>
+                        </li>
                     ))
                 }
             </ul>
@@ -29,9 +56,11 @@ const brands = ["GLOBALCON", "STEELCORE", "INDUS-X", "ARCHI-TECH"];
 
 <style>
     .trust-bar {
-        background-color: var(--color-gray-100);
-        border-bottom: 1px solid var(--color-gray-200);
-        padding: 2rem 1rem;
+        background-color: var(--color-black);
+        border-top: 4px solid var(--color-yellow);
+        border-bottom: 1px solid #2a2a2a;
+        padding: 2.5rem 1.5rem;
+        overflow: hidden;
     }
 
     .trust-bar__inner {
@@ -40,48 +69,122 @@ const brands = ["GLOBALCON", "STEELCORE", "INDUS-X", "ARCHI-TECH"];
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 1.5rem;
-        text-align: center;
+        gap: 2rem;
     }
 
     .trust-bar__label {
         font-size: 0.65rem;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: var(--color-gray-500);
+        letter-spacing: 0.2em;
+        color: var(--color-yellow);
+        opacity: 0.7;
     }
 
-    .trust-bar__brands {
+    .trust-bar__stats {
         list-style: none;
         padding: 0;
         margin: 0;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        align-items: stretch;
+        width: 100%;
+        gap: 0;
+    }
+
+    .trust-bar__stat {
+        display: flex;
         align-items: center;
-        gap: 1.5rem 2.5rem;
+        gap: 0.875rem;
+        padding: 0 2.5rem;
+        flex: 1 1 160px;
+        min-width: 160px;
+        position: relative;
     }
 
-    .trust-bar__brand {
-        font-size: 1.25rem;
-        font-weight: 900;
-        font-style: italic;
-        color: var(--color-black);
-        opacity: 0.35;
-        filter: grayscale(1);
+    /* Separadores verticales entre items */
+    .trust-bar__stat + .trust-bar__stat::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10%;
+        height: 80%;
+        width: 1px;
+        background-color: rgba(255, 215, 0, 0.15);
+    }
+
+    .trust-bar__icon {
+        flex-shrink: 0;
+        color: var(--color-yellow);
+        opacity: 0.9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .trust-bar__icon svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .trust-bar__data {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .trust-bar__value {
+        font-family: var(--font-heading);
+        font-size: 1.75rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--color-white);
         letter-spacing: -0.02em;
-        user-select: none;
-        transition: opacity 0.3s ease;
     }
 
-    .trust-bar__brand:hover {
-        opacity: 0.6;
+    .trust-bar__desc {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--color-gray-400);
+        line-height: 1.3;
     }
 
-    @media (min-width: 768px) {
-        .trust-bar__brand {
-            font-size: 1.5rem;
+    /* Highlight del primer item (más importante) */
+    .trust-bar__stat:first-child .trust-bar__value {
+        color: var(--color-yellow);
+    }
+
+    @media (max-width: 768px) {
+        .trust-bar__stats {
+            gap: 1.5rem 0;
+        }
+
+        .trust-bar__stat {
+            flex: 1 1 calc(50% - 1.5rem);
+            min-width: 140px;
+            padding: 0 1.25rem;
+        }
+
+        .trust-bar__stat:nth-child(odd)::before {
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .trust-bar__stat {
+            flex: 1 1 100%;
+            padding: 0.75rem 1rem;
+        }
+
+        .trust-bar__stat + .trust-bar__stat::before {
+            display: none;
+        }
+
+        .trust-bar__stat + .trust-bar__stat {
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
         }
     }
 </style>

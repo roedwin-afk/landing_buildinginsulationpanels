@@ -20,13 +20,29 @@ const specsPath = lang === "es" ? `${base}/es/tech-specs` : `${base}/tech-specs`
 const blog = lang === "es" ? `${base}/es/blog` : `${base}/blog`
 
 const alternatePath  = getAlternatePath(Astro.url, base);
+
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "");
+
+const navLinks = [
+  { href: solutionsPath,  label: t.nav.solutions  },
+  { href: performancePath, label: t.nav.performance },
+  { href: specsPath,      label: t.nav.techSpecs   },
+  { href: blog,           label: t.nav.blog        },
+];
 ---
 
 <ul class={`nav-links nav-links--${variant}`}>
-  <li><a href={solutionsPath}>{t.nav.solutions}</a></li>
-  <li><a href={performancePath}>{t.nav.performance}</a></li>
-  <li><a href={specsPath}>{t.nav.techSpecs}</a></li>
-  <li><a href={blog}>{t.nav.blog}</a></li>
+  {navLinks.map(({ href, label }) => {
+    const isActive = currentPath === href.replace(/\/$/, "") || currentPath.startsWith(href);
+    return (
+      <li>
+        <a href={href} class={isActive ? "is-active" : ""} aria-current={isActive ? "page" : undefined}>
+          {label}
+        </a>
+      </li>
+    );
+  })}
   <li class="nav-links__lang">
     <a href={alternatePath} class="lang-switcher">
       {lang === "es" ? "EN" : "ES"}
@@ -115,4 +131,33 @@ const alternatePath  = getAlternatePath(Astro.url, base);
   .nav-links--mobile .lang-switcher {
     color: var(--color-yellow);
   }
+
+  /* Navbar */
+.nav-links--navbar a.is-active {
+  color: var(--color-yellow);
+  position: relative;
+}
+
+.nav-links--navbar a.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-yellow);
+}
+
+/* Footer */
+.nav-links--footer a.is-active {
+  color: var(--color-yellow);
+}
+
+/* Mobile */
+.nav-links--mobile a.is-active {
+  color: var(--color-yellow);
+  background-color: #2a2a2a;
+  border-left: 3px solid var(--color-yellow);
+  padding-left: calc(1.5rem - 3px);
+}
 </style>

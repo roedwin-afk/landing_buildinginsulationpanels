@@ -20,7 +20,14 @@ export const es: TranslationKeys = {
     ctaSecondary: "Ver Soluciones",
   },
   trust: {
-    label: "Confiado por Ingenieros Civiles y Desarrolladores Industriales en todo el mundo",
+    label: "La confianza de ingenieros en todo el mundo",
+    stats: {
+      projectsCompleted: "Proyectos completados",
+      fasterInstall: "Instalación más rápida",
+      thermalRating: "Clasificación térmica máx.",
+      warranty: "Garantía del producto",
+      fireRating: "Resistencia al fuego",
+    }
   },
   benefits: {
     title: "¿Por qué elegirnos?",

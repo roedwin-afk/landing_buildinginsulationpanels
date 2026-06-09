@@ -18,7 +18,14 @@ export const en = {
     ctaSecondary: "View Solutions",
   },
   trust: {
-    label: "Trusted by Civil Engineers & Industrial Developers Worldwide",
+    label: "Trusted by engineers worldwide",
+    stats: {
+      projectsCompleted: "Projects completed",
+      fasterInstall: "Faster installation",
+      thermalRating: "Max thermal rating",
+      warranty: "Product warranty",
+      fireRating: "Fire resistance",
+    }
   },
   benefits: {
     title: "Why Choose Us",
