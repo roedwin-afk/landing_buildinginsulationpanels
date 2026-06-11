@@ -1,10 +1,8 @@
 name: Deploy Website via FTP
-
 on:
   push:
     branches:
-      - main  # O la rama que utilices para producción
-
+      - main
 jobs:
   web-deploy:
     name: Build and Deploy
@@ -12,23 +10,21 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
-
     - name: 🛠 Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 22
-
     - name: 📦 Install dependencies
       run: npm install
-
     - name: 🏗 Build Project
       run: npm run build:test
-
+      env:
+        WP_API_URL: ${{ secrets.WP_API_URL }}
     - name: 📂 Sync files to FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./dist/  # Carpeta que genera Astro
+        local-dir: ./dist/
         server-dir: ./landings/buildinginsulationpanels/
