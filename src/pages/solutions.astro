@@ -44,9 +44,9 @@ const products = [
 const comparisonRows = [
     {
         feature: t.solutionsPage.comparison.fireRating,
-        wall: "Class A",
-        roofing: "Class A",
-        coldStorage: "Class A",
+        wall: lang == "es" ? "Clase A" : "Class A",
+        roofing: lang == "es" ? "Clase A" : "Class A",
+        coldStorage: lang == "es" ? "Clase A" : "Class A",
     },
     {
         feature: t.solutionsPage.comparison.rValue,
@@ -62,9 +62,9 @@ const comparisonRows = [
     },
     {
         feature: t.solutionsPage.comparison.warranty,
-        wall: "20 yr",
-        roofing: "25 yr",
-        coldStorage: "25 yr",
+        wall: lang == "es" ? "20 años" : "20 yr",
+        roofing: lang == "es" ? "25 años" : "25 yr",
+        coldStorage: lang == "es" ? "25 años" : "25 yr",
     },
     {
         feature: t.solutionsPage.comparison.usdaApproved,

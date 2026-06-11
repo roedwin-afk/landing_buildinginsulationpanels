@@ -11,6 +11,8 @@ const base = import.meta.env.BASE_URL;
 const lang = getLang(Astro.url, base);
 const t = useTranslations(lang);
 
+const fileName = lang == "es" ? `${base}files/data-sheet.pdf` : `${base}files/data-sheet-en.pdf`;
+
 const tableRows = [
   { spec: t.techSpecsPage.table.rValue,     wall: t.techSpecsPage.table.values.wall.rValue,     roofing: t.techSpecsPage.table.values.roofing.rValue,     cold: t.techSpecsPage.table.values.coldStorage.rValue },
   { spec: t.techSpecsPage.table.thickness,  wall: t.techSpecsPage.table.values.wall.thickness,  roofing: t.techSpecsPage.table.values.roofing.thickness,  cold: t.techSpecsPage.table.values.coldStorage.thickness },
@@ -22,15 +24,14 @@ const tableRows = [
 ];
 
 const downloads = [
-  { icon: FileText, ...t.techSpecsPage.downloads.items.dataSheet },
-  { icon: Box,      ...t.techSpecsPage.downloads.items.bim },
-  { icon: BookOpen, ...t.techSpecsPage.downloads.items.installation },
-  { icon: Shield,   ...t.techSpecsPage.downloads.items.certs },
+  { icon: FileText, ...t.techSpecsPage.downloads.items.dataSheet, file: fileName},
+  { icon: Box,      ...t.techSpecsPage.downloads.items.bim, file: `${base}files/bim.zip` },
+  { icon: BookOpen, ...t.techSpecsPage.downloads.items.installation, file: `${base}files/installation-guide.pdf` },
+  { icon: Shield,   ...t.techSpecsPage.downloads.items.certs, file: `${base}files/certs.pdf` },
 ];
 ---
 
 <BaseLayout t={t} lang={lang}>
-
   <Navbar t={t} lang={lang} />
 
   <!-- Hero -->
@@ -98,7 +99,7 @@ const downloads = [
       </ScrollReveal>
 
       <div class="downloads__grid">
-        {downloads.map(({ icon: Icon, title, description }, i) => (
+        {downloads.map(({ icon: Icon, title, description, file }, i) => (
           <ScrollReveal variant="fade-up" delay={(i % 3) as 0 | 1 | 2}>
             <div class="download-card">
               <div class="download-card__icon">
@@ -108,7 +109,7 @@ const downloads = [
                 <h3 class="download-card__title">{title}</h3>
                 <p class="download-card__description">{description}</p>
               </div>
-              <a href="#" class="download-card__btn">
+              <a href={file} download class="download-card__btn">
                 ↓ {t.techSpecsPage.downloads.button}
               </a>
             </div>

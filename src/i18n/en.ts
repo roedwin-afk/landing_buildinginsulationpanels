@@ -93,7 +93,7 @@ export const en = {
     },
     email: {
       label: "Email Enquiries",
-      value: "sales@buildinginsulationpanels.com",
+      value: "ventas@mequipo.com",
     },
     address: {
       label: "Headquarters",

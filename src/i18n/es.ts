@@ -95,7 +95,7 @@ export const es: TranslationKeys = {
     },
     email: {
       label: "Consultas por Email",
-      value: "sales@buildinginsulationpanels.com",
+      value: "ventas@mequipo.com",
     },
     address: {
       label: "Sede Central",
@@ -224,7 +224,7 @@ export const es: TranslationKeys = {
       items: {
         faster: { value: "40%", label: "Instalación más Rápida" },
         rValue: { value: "R-30+", label: "Eficiencia Energética" },
-        lifespan: { value: "25yr", label: "Garantía Estructural" },
+        lifespan: { value: "25 años", label: "Garantía Estructural" },
         fireRating: { value: "A", label: "Clase de Seguridad contra Incendios" },
       },
     },
