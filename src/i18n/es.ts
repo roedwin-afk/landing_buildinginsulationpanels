@@ -7,6 +7,7 @@ export const es: TranslationKeys = {
     techSpecs: "Especificaciones",
     getQuote: "Cotizar",
     blog: "Blog",
+    faq: "FAQ"
   },
   hero: {
     badge: "Protección de Grado Industrial",
@@ -304,5 +305,78 @@ export const es: TranslationKeys = {
     title_line1: "Encuéntranos",
     title_line2: "Aquí",
     cta: "Obtener presupuesto →",
+  },
+  faqPage: {
+    meta: {
+      title: "Preguntas Frecuentes — Paneles de Aislamiento Industrial | Building Insulation Panels Corp.",
+      description:
+        "Respuestas técnicas sobre paneles de aislamiento industrial: valor R, clasificación de fuego, cuartos fríos, tiempo de instalación y precios en México.",
+    },
+    hero: {
+      badge: "Base de Conocimiento",
+      title: "Preguntas",
+      titleHighlight: "Frecuentes",
+      description:
+        "Respuestas técnicas para ingenieros, arquitectos y gerentes de proyectos que evalúan paneles de aislamiento de alto rendimiento para construcción industrial y comercial en México.",
+    },
+    cta: {
+      title: "¿Tienes Más",
+      titleHighlight: "Preguntas?",
+      description:
+        "Nuestro equipo de ingeniería responde en 24 horas con una cotización técnica completa.",
+      button: "Contactar un Experto",
+    },
+    items: [
+      {
+        question: "¿Qué es el valor R y por qué es importante en edificios industriales en México?",
+        answer:
+          "El valor R mide la resistencia de un material al flujo de calor: a mayor valor, mejor aislamiento. Para instalaciones industriales en las zonas climáticas de México —desde el norte árido hasta las costas húmedas— se recomienda un mínimo de R-15 en muros y R-20 en techos. Nuestros paneles alcanzan hasta R-30+ para aplicaciones de cuartos fríos. Cada punto de valor R reduce directamente el consumo energético del sistema HVAC, lo que en almacenes grandes se traduce en ahorros del 15 al 40% en la factura eléctrica.",
+      },
+      {
+        question: "¿Cuánto tiempo tarda la instalación de paneles en un almacén industrial?",
+        answer:
+          "Con nuestro sistema de machihembrado interlocking, las cuadrillas instalan entre 300 y 500 m² por día, hasta un 40% más rápido que los métodos tradicionales. Una nave de 2,000 m² puede quedar cerrada en 4 a 5 días hábiles. Menos tiempo en obra significa menor costo de mano de obra y entrega anticipada del proyecto.",
+      },
+      {
+        question: "¿Qué clasificación contra incendios tienen los paneles y qué norma aplica?",
+        answer:
+          "Todos nuestros paneles cuentan con clasificación Clase A (la más alta) bajo la norma ASTM E84, que mide propagación de llama y generación de humo. Esta certificación es exigida por instalaciones industriales, plantas procesadoras de alimentos y cualquier edificio sujeto a la NOM-002-STPS de seguridad contra incendios en México. Los paneles Clase A facilitan los trámites de permisos municipales y pueden reducir las primas de seguro.",
+      },
+      {
+        question: "¿Cuál es la diferencia entre paneles para muro y paneles para techo?",
+        answer:
+          "Los paneles de muro (50–200 mm de espesor, R-15) están diseñados para fachadas verticales y divisiones interiores, con acabados liso o acanalado y garantía de 20 años. Los paneles de techo (75–200 mm, R-20) incluyen recubrimiento resistente a UV, amortiguación acústica de 42 dB y capacidad de carga de 150 kg/m², con garantía de 25 años. Usar el tipo incorrecto en la aplicación reduce tanto el rendimiento térmico como la vida útil estructural.",
+      },
+      {
+        question: "¿Los paneles para cuartos fríos son aptos para plantas procesadoras de alimentos?",
+        answer:
+          "Sí. Nuestros paneles para refrigeración tienen recubrimientos aprobados por el USDA, cero puentes térmicos y operan en rangos de temperatura de -40°C a +50°C. El núcleo R-30+ mantiene temperaturas internas estables bajo carga de refrigeración continua. Se utilizan en plantas procesadoras de alimentos, bodegas farmacéuticas y centros de distribución en México y Centroamérica. Escríbenos a ventas@mequipo.com o llama al +52 55 9990 3546 para una cotización por proyecto.",
+      },
+      {
+        question: "¿Cuánto cuestan los paneles de aislamiento industrial en México?",
+        answer:
+          "El precio varía según tipo, espesor y volumen de proyecto. Como referencia general, los paneles sándwich estructurales para uso industrial en México oscilan entre MXN 450 y 1,200 por m², dependiendo del espesor del núcleo (50–250 mm) y el acabado. Los paneles de refrigeración tienen un costo mayor debido a sus núcleos de mayor densidad. Para un presupuesto exacto, nuestro equipo entrega una cotización completa en 24 horas — escribe a ventas@mequipo.com o llama al +52 55 9990 3546.",
+      },
+      {
+        question: "¿Funcionan los paneles en zonas sísmicas como las de México?",
+        answer:
+          "Sí. Nuestros paneles son ligeros (12–18 kg/m²), lo que reduce significativamente la carga sísmica sobre la estructura en comparación con muros de concreto o mampostería. El sistema de machihembrado distribuye las fuerzas laterales de forma uniforme. Proyectos en la Ciudad de México, Monterrey y la costa del Pacífico han sido construidos exitosamente con nuestros paneles siguiendo las guías estructurales del CFE.",
+      },
+      {
+        question: "¿Distribuyen e instalan en toda la República Mexicana?",
+        answer:
+          "Sí. Building Insulation Panels Corp. suministra paneles y soporte técnico en toda la República Mexicana, con sede en Polanco, Ciudad de México (Av. Presidente Masaryk No. 61, Int. 901, CP 11560). Contamos con instaladores certificados en el Bajío, Monterrey, Guadalajara y la Zona Metropolitana del Valle de México. Llama al +52 55 9990 3546 o escribe a ventas@mequipo.com para contactar al representante técnico más cercano.",
+      },
+      {
+        question: "¿Qué documentación técnica entregan para arquitectos e ingenieros?",
+        answer:
+          "Entregamos un paquete completo: fichas técnicas con valores certificados bajo normas ASTM, archivos BIM (Revit e IFC), guías de instalación paso a paso con diagramas, y documentos de certificación USDA, ASTM e ISO 9001:2015. El soporte BIM completo está disponible para proyectos en Revit. Descarga el catálogo o solicita el paquete técnico desde nuestra página de Especificaciones Técnicas.",
+      },
+      {
+        question: "¿Cómo se comparan los paneles con la construcción tradicional de block de concreto?",
+        answer:
+          "Los paneles sándwich aislados ofrecen un rendimiento térmico 3 a 4 veces superior al block hueco de concreto con el 30–40% del tiempo de construcción. Una nave típica de 1,000 m² tarda 4–6 semanas en block y 7–10 días con nuestro sistema de paneles. Los costos de ciclo de vida también son menores: sin pintura cada 5 años, sin agrietamiento por expansión térmica y mantenimiento mínimo durante 20–25 años.",
+      },
+    ],
   },
 };

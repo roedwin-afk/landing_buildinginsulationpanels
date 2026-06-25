@@ -5,6 +5,7 @@ export const en = {
     techSpecs: "Tech Specs",
     getQuote: "Get Quote",
     blog: "Blog",
+    faq: "FAQ"
   },
   hero: {
     badge: "Industrial Grade Protection",
@@ -303,7 +304,79 @@ export const en = {
     title_line2: "Here",
     cta: "Get a Quote →",
   },
-
+  faqPage: {
+    meta: {
+      title: "FAQ — Industrial Insulation Panels | Building Insulation Panels Corp.",
+      description:
+        "Answers to the most common questions about industrial insulation panels: R-value, fire rating, cold storage, installation time, and pricing in Mexico.",
+    },
+    hero: {
+      badge: "Knowledge Base",
+      title: "Frequently Asked",
+      titleHighlight: "Questions",
+      description:
+        "Technical answers for engineers, architects, and project managers evaluating high-performance insulation panels for industrial and commercial construction in Mexico.",
+    },
+    cta: {
+      title: "Still Have",
+      titleHighlight: "Questions?",
+      description:
+        "Our engineering team responds within 24 hours with a complete technical quote.",
+      button: "Contact an Expert",
+    },
+    items: [
+      {
+        question: "What is R-value and why does it matter for industrial buildings in Mexico?",
+        answer:
+          "R-value measures a material's resistance to heat flow — the higher, the better. For industrial facilities in Mexico's climate zones (ranging from the hot-dry north to humid coastal areas), a minimum R-15 is recommended for walls and R-20 for roofs. Our panels reach up to R-30+ for cold-storage applications. Every point of R-value directly reduces HVAC energy consumption, which in large warehouses translates into savings of 15–40% on electricity bills.",
+      },
+      {
+        question: "How long does it take to install insulation panels in an industrial warehouse?",
+        answer:
+          "With our interlocking tongue-and-groove system, crews install 300–500 m² per day, which is up to 40% faster than traditional construction methods. A standard 2,000 m² warehouse shell can be enclosed in 4–5 working days. Faster installation means lower labor costs and earlier project delivery.",
+      },
+      {
+        question: "What fire rating do your panels carry and which standard applies?",
+        answer:
+          "All our panels are classified as Class A (the highest rating) under ASTM E84, which measures flame spread and smoke development. This certification is required for industrial facilities, food processing plants, and any building subject to NOM-002-STPS fire safety regulations in Mexico. Class A panels help reduce insurance premiums and simplify municipal building permits.",
+      },
+      {
+        question: "What is the difference between wall panels and roofing panels?",
+        answer:
+          "Wall panels (50–200 mm thick, R-15) are designed for vertical facades and interior partitions. They feature smooth or ribbed finishes and carry a 20-year warranty. Roofing panels (75–200 mm, R-20) include UV-resistant coatings, acoustic dampening of 42 dB, and a higher load capacity of 150 kg/m², with a 25-year warranty. Choosing the wrong type for the application reduces both thermal performance and structural life.",
+      },
+      {
+        question: "Are your cold storage panels suitable for food processing plants?",
+        answer:
+          "Yes. Our cold storage panels feature USDA-approved coatings, zero thermal bridging, and operate in temperature ranges from -40°C to +50°C. The R-30+ core maintains stable interior temperatures even under continuous refrigeration load. They are used in food processing plants, pharmaceutical warehouses, and distribution centers across Mexico and Central America. Contact ventas@mequipo.com or call +52 55 9990 3546 for a project-specific quote.",
+      },
+      {
+        question: "How much do industrial insulation panels cost in Mexico?",
+        answer:
+          "Panel pricing varies by type, thickness, and project volume. As a general reference, structural insulated panels for industrial use in Mexico range from MXN 450–1,200 per m² depending on core thickness (50 mm–250 mm) and finish. Cold-storage panels command a premium due to their higher-density cores. For an accurate budget, our team provides a complete quote within 24 hours — email ventas@mequipo.com or call +52 55 9990 3546.",
+      },
+      {
+        question: "Can the panels be used in seismic zones common in Mexico?",
+        answer:
+          "Yes. Our panels are lightweight (12–18 kg/m²), which significantly reduces the seismic load on structures compared to concrete or masonry walls. The interlocking system distributes lateral forces evenly across the panel field. Projects in Mexico City, Monterrey, and Pacific Coast zones have been successfully built with our panels following CFE structural guidelines.",
+      },
+      {
+        question: "Do you supply and install across all of Mexico?",
+        answer:
+          "Yes. Building Insulation Panels Corp. supplies panels and technical support across the entire Mexican Republic, with headquarters in Polanco, Mexico City (Av. Presidente Masaryk No. 61, Int. 901, CP 11560). We work with certified installation partners in the Bajío, Monterrey, Guadalajara, and CDMX metropolitan areas. Call +52 55 9990 3546 or email ventas@mequipo.com to connect with the nearest technical representative.",
+      },
+      {
+        question: "What technical documentation do you provide for architects and engineers?",
+        answer:
+          "We supply a full package: product data sheets with ASTM-tested values, BIM files (Revit and IFC), step-by-step installation guides with diagrams, and USDA / ASTM / ISO 9001:2015 certification documents. Full BIM support is available for projects using Revit. Download the catalog or request the technical package from our Tech Specs page.",
+      },
+      {
+        question: "How do your panels compare to traditional concrete block construction?",
+        answer:
+          "Insulated sandwich panels offer 3–4× better thermal performance than hollow concrete block at 30–40% of the construction time. A typical 1,000 m² warehouse takes 4–6 weeks with block masonry vs. 7–10 days with our panel system. Lifecycle costs are also lower: no painting every 5 years, no cracking from thermal expansion, and minimal maintenance for 20–25 years.",
+      },
+    ],
+  },
 } as const;
 
 export type DeepString<T> = {

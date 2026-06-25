@@ -18,6 +18,7 @@ const solutionsPath = lang === "es" ? `${base}/es/solutions` : `${base}/solution
 const performancePath = lang === "es" ? `${base}/es/performance` : `${base}/performance`
 const specsPath = lang === "es" ? `${base}/es/tech-specs` : `${base}/tech-specs`
 const blog = lang === "es" ? `${base}/es/blog` : `${base}/blog`
+const faq = lang === "es" ? `${base}/es/faq` : `${base}/faq`
 
 const alternatePath  = getAlternatePath(Astro.url, base);
 
@@ -29,6 +30,7 @@ const navLinks = [
   { href: performancePath, label: t.nav.performance },
   { href: specsPath,      label: t.nav.techSpecs   },
   { href: blog,           label: t.nav.blog        },
+  { href: faq,           label: t.nav.faq        },
 ];
 ---
 
