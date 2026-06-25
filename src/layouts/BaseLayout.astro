@@ -2,6 +2,8 @@
 import { ClientRouter } from "astro:transitions";
 import type { TranslationKeys } from "../i18n/en";
 import type { Lang } from "../i18n/utils";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
 
 interface Props {
   t: TranslationKeys;
@@ -58,9 +60,11 @@ const alternateURL =
     <ClientRouter />
   </head>
   <body>
+    <Navbar t={t} lang={lang} />
     <main>
       <slot />
     </main>
+    <Footer t={t} lang={lang} />
 
     <style is:global>
       :root {

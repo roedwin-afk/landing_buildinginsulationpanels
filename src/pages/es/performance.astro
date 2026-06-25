@@ -3,8 +3,6 @@ import { useTranslations, getLang } from "../../i18n/utils";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ScrollReveal from "../../components/ui/ScrollReveal.astro";
 import CtaSection from "../../components/sections/CtaSection.astro";
-import Navbar from "../../components/layout/Navbar.astro";
-import Footer from "../../components/layout/Footer.astro";
 import { Zap, Shield, Thermometer, Award } from "lucide-astro";
 
 const base = import.meta.env.BASE_URL;
@@ -48,9 +46,6 @@ const certifications = [
 ---
 
 <BaseLayout t={t} lang={lang}>
-
-    <Navbar t={t} lang={lang} />
-
   <!-- Hero -->
   <section class="page-hero">
     <div class="page-hero__accent" aria-hidden="true"></div>
@@ -59,9 +54,13 @@ const certifications = [
         <div class="page-hero__badge">{t.performancePage.hero.badge}</div>
         <h1 class="page-hero__title">
           {t.performancePage.hero.title}
-          <span class="page-hero__highlight">{t.performancePage.hero.titleHighlight}</span>
+          <span class="page-hero__highlight"
+            >{t.performancePage.hero.titleHighlight}</span
+          >
         </h1>
-        <p class="page-hero__description">{t.performancePage.hero.description}</p>
+        <p class="page-hero__description">
+          {t.performancePage.hero.description}
+        </p>
       </ScrollReveal>
     </div>
   </section>
@@ -69,15 +68,19 @@ const certifications = [
   <!-- Benefits -->
   <section class="benefits">
     <div class="benefits__inner">
-      {benefits.map(({ icon: Icon, title, description, variant }, i) => (
-        <ScrollReveal variant="fade-up" delay={i as 0 | 1 | 2}>
-          <div class={`benefit-card benefit-card--${variant}`}>
-            <div class="benefit-card__icon"><Icon size={52} /></div>
-            <h2 class="benefit-card__title">{title}</h2>
-            <p class="benefit-card__description">{description}</p>
-          </div>
-        </ScrollReveal>
-      ))}
+      {
+        benefits.map(({ icon: Icon, title, description, variant }, i) => (
+          <ScrollReveal variant="fade-up" delay={i as 0 | 1 | 2}>
+            <div class={`benefit-card benefit-card--${variant}`}>
+              <div class="benefit-card__icon">
+                <Icon size={52} />
+              </div>
+              <h2 class="benefit-card__title">{title}</h2>
+              <p class="benefit-card__description">{description}</p>
+            </div>
+          </ScrollReveal>
+        ))
+      }
     </div>
   </section>
 
@@ -87,18 +90,22 @@ const certifications = [
       <ScrollReveal variant="fade-up">
         <h2 class="stats__title">
           {t.performancePage.stats.title}
-          <span class="stats__highlight">{t.performancePage.stats.titleHighlight}</span>
+          <span class="stats__highlight"
+            >{t.performancePage.stats.titleHighlight}</span
+          >
         </h2>
       </ScrollReveal>
       <div class="stats__grid">
-        {stats.map(({ value, label }, i) => (
-          <ScrollReveal variant="fade-up" delay={i as 0 | 1 | 2}>
-            <div class="stat-card">
-              <span class="stat-card__value">{value}</span>
-              <p class="stat-card__label">{label}</p>
-            </div>
-          </ScrollReveal>
-        ))}
+        {
+          stats.map(({ value, label }, i) => (
+            <ScrollReveal variant="fade-up" delay={i as 0 | 1 | 2}>
+              <div class="stat-card">
+                <span class="stat-card__value">{value}</span>
+                <p class="stat-card__label">{label}</p>
+              </div>
+            </ScrollReveal>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -109,29 +116,34 @@ const certifications = [
       <ScrollReveal variant="fade-up">
         <h2 class="certs__title">
           {t.performancePage.certifications.title}
-          <span class="certs__highlight">{t.performancePage.certifications.titleHighlight}</span>
+          <span class="certs__highlight"
+            >{t.performancePage.certifications.titleHighlight}</span
+          >
         </h2>
-        <p class="certs__subtitle">{t.performancePage.certifications.subtitle}</p>
+        <p class="certs__subtitle">
+          {t.performancePage.certifications.subtitle}
+        </p>
       </ScrollReveal>
 
       <div class="certs__grid">
-        {certifications.map(({ icon: Icon, title, description }, i) => (
-          <ScrollReveal variant="fade-up" delay={(i % 3) as 0 | 1 | 2}>
-            <div class="cert-card">
-              <div class="cert-card__icon"><Icon size={32} /></div>
-              <h3 class="cert-card__title">{title}</h3>
-              <p class="cert-card__description">{description}</p>
-            </div>
-          </ScrollReveal>
-        ))}
+        {
+          certifications.map(({ icon: Icon, title, description }, i) => (
+            <ScrollReveal variant="fade-up" delay={(i % 3) as 0 | 1 | 2}>
+              <div class="cert-card">
+                <div class="cert-card__icon">
+                  <Icon size={32} />
+                </div>
+                <h3 class="cert-card__title">{title}</h3>
+                <p class="cert-card__description">{description}</p>
+              </div>
+            </ScrollReveal>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <CtaSection t={t} lang={lang} />
-
-  <Footer t={t} lang={lang} />
-
 </BaseLayout>
 
 <style>
