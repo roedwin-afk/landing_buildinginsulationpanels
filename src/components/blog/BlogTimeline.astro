@@ -1,0 +1,195 @@
+---
+interface Props {
+  posts: any[];
+  currentPage: number;
+  totalPages: number;
+  basePath: string;
+  blogBase: string;
+  dateLocale?: string;
+  t: any;
+  locale?: string;
+  layout?: string; // se ignora: solo permite cambiarlo por <BlogList> del kit sin tocar props
+}
+
+const { posts, currentPage, totalPages, basePath, blogBase, dateLocale, t, locale = 'en' } = Astro.props;
+
+const loc = dateLocale || locale;
+const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+const pageHref = (n: number) => (n === 1 ? blogBase : `${basePath}${n}/`);
+const es = locale === 'es';
+
+// WP entrega la fecha sin zona horaria: se toma tal cual para que el día no se corra
+function parts(raw: string) {
+  const [y, m, d] = raw.slice(0, 10).split('-').map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return {
+    day: String(d).padStart(2, '0'),
+    month: dt.toLocaleDateString(loc, { month: 'short', timeZone: 'UTC' }).replace('.', '').toUpperCase(),
+    year: String(y),
+  };
+}
+---
+
+<section class="tl">
+  <div class="tl__container">
+    <header class="tl__header">
+      <div class="tl__badge">{t.blog.tagline}</div>
+      <h1 class="tl__title">
+        {t.blog.title_line1}
+        <span class="tl__title-highlight">{t.blog.title_line2}</span>
+      </h1>
+      <p class="tl__desc">{t.blog.description}</p>
+    </header>
+
+    {posts.length === 0 ? (
+      <p class="tl__empty">{es ? 'Aún no hay artículos.' : 'No articles yet.'}</p>
+    ) : (
+      <ol class="tl__list">
+        {posts.map((post: any) => {
+          const img = post._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+          const d = parts(post.date);
+          return (
+            <li class="tl__item">
+              <time class="tl__date" datetime={post.date}>
+                <span class="tl__day">{d.day}</span>
+                <span class="tl__month">{d.month}</span>
+                <span class="tl__year">{d.year}</span>
+              </time>
+              <article class="tl__card">
+                <a href={`${blogBase}${post.slug}/`} class="tl__link">
+                  {img && (
+                    <div class="tl__thumb">
+                      <img src={img} alt="" loading="lazy" />
+                    </div>
+                  )}
+                  <div class="tl__body">
+                    <h2 class="tl__post-title" set:html={post.title.rendered} />
+                    <div class="tl__excerpt" set:html={post.excerpt.rendered} />
+                    <span class="tl__cta">{t.blog.btncta} →</span>
+                  </div>
+                </a>
+              </article>
+            </li>
+          );
+        })}
+      </ol>
+    )}
+
+    {totalPages > 1 && (
+      <nav class="tl__pagination" aria-label={es ? 'Paginación del blog' : 'Blog pagination'}>
+        {currentPage > 1 && (
+          <a href={pageHref(currentPage - 1)} class="tl__btn">← {t.blog.btn_prev}</a>
+        )}
+        <div class="tl__pages">
+          {pages.map((n) => (
+            
+            <a  href={pageHref(n)}
+              class={`tl__page ${n === currentPage ? 'tl__page--active' : ''}`}
+              aria-current={n === currentPage ? 'page' : undefined}
+            >{n}</a>
+          ))}
+        </div>
+        {currentPage < totalPages && (
+          <a href={pageHref(currentPage + 1)} class="tl__btn">{t.blog.btn_next} →</a>
+        )}
+      </nav>
+    )}
+  </div>
+</section>
+
+<style>
+  .tl {
+    --tl-accent: var(--color-yellow, var(--bk-accent, #facc15));
+    --tl-ink: var(--color-black, var(--bk-black, #0a0a0a));
+    --tl-paper: var(--color-white, var(--bk-white, #fff));
+    --tl-line: var(--color-gray-200, var(--bk-border, #e5e7eb));
+    --tl-soft: var(--color-gray-100, #f3f4f6);
+    --tl-muted: var(--color-gray-600, var(--bk-muted, #6b7280));
+    --tl-font: var(--font-heading, var(--bk-font-heading, Georgia, serif));
+    --tl-date-w: 92px;
+    background: var(--tl-paper);
+    padding: 6rem 1rem;
+    min-height: 100vh;
+  }
+  .tl__container { max-width: var(--container-max, var(--bk-container-max, 1200px)); margin-inline: auto; }
+
+  /* Header */
+  .tl__header { margin-bottom: 4rem; max-width: 48rem; }
+  .tl__badge {
+    display: inline-block; background: var(--tl-accent); color: var(--tl-ink);
+    font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .2em;
+    padding: .35rem 1rem; margin-bottom: 1.5rem;
+  }
+  .tl__title {
+    font-family: var(--tl-font); font-size: clamp(3rem, 8vw, 5rem); font-weight: 700;
+    line-height: 1; text-transform: uppercase; color: var(--tl-ink); margin: 0 0 1rem;
+  }
+  .tl__title-highlight { background: var(--tl-ink); color: var(--tl-accent); padding: 0 .3rem; }
+  .tl__desc { color: var(--tl-muted); font-size: 1.1rem; line-height: 1.7; margin: 0; }
+  .tl__empty { color: var(--tl-muted); padding: 3rem 0; }
+
+  /* Línea de tiempo */
+  .tl__list { list-style: none; margin: 0; padding: 0; position: relative; display: flex; flex-direction: column; gap: 2.5rem; }
+  .tl__list::before {
+    content: ""; position: absolute; top: 0; bottom: 0;
+    left: calc(var(--tl-date-w) / 2 - 1.5px); width: 3px; background: var(--tl-line);
+  }
+  .tl__item { position: relative; display: grid; grid-template-columns: var(--tl-date-w) 1fr; gap: 2rem; align-items: start; }
+
+  .tl__date {
+    position: relative; z-index: 1; width: var(--tl-date-w); text-align: center;
+    background: var(--tl-ink); color: var(--tl-accent); padding: .8rem .25rem;
+    font-family: var(--tl-font); line-height: 1;
+    box-shadow: 0 0 0 6px var(--tl-paper); /* "corta" la línea alrededor del bloque */
+  }
+  .tl__day { display: block; font-size: 2.25rem; font-weight: 700; }
+  .tl__month { display: block; font-size: .9rem; letter-spacing: .15em; margin-top: .3rem; }
+  .tl__year { display: block; font-size: .75rem; letter-spacing: .1em; margin-top: .4rem; color: var(--tl-paper); opacity: .7; }
+
+  /* Tarjeta */
+  .tl__card { border: 2px solid var(--tl-line); background: var(--tl-paper); overflow: hidden; transition: transform .3s ease, border-color .3s ease; }
+  .tl__card:hover { transform: translateY(-4px); border-color: var(--tl-accent); border-bottom-width: 4px; }
+  .tl__link { display: flex; color: inherit; text-decoration: none; }
+  .tl__thumb { position: relative; flex: 0 0 260px; min-height: 180px; background: var(--tl-soft); overflow: hidden; }
+  .tl__thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+  .tl__card:hover .tl__thumb img { transform: scale(1.05); }
+  .tl__body { flex: 1; min-width: 0; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: .6rem; }
+  .tl__post-title { font-family: var(--tl-font); font-size: 1.5rem; font-weight: 700; line-height: 1.1; text-transform: uppercase; color: var(--tl-ink); margin: 0; }
+  .tl__excerpt {
+    font-size: .95rem; color: var(--tl-muted); line-height: 1.65; margin: 0;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .tl__excerpt :global(p) { margin: 0; }
+  .tl__cta { margin-top: auto; padding-top: .5rem; font-size: .875rem; font-weight: 700; color: var(--tl-ink); transition: transform .2s ease; }
+  .tl__card:hover .tl__cta { transform: translateX(4px); }
+
+  /* Paginación (usa los colores de blog.config: ui.pagination*) */
+  .tl__pagination { display: flex; align-items: center; justify-content: center; gap: .75rem; flex-wrap: wrap; margin-top: 4rem; padding-top: 3rem; border-top: 2px solid var(--tl-line); }
+  .tl__pages { display: flex; gap: .4rem; }
+  .tl__btn {
+    padding: .6rem 1.25rem; font-family: var(--tl-font); font-size: .9rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em; text-decoration: none;
+    background: var(--bk-pagination-btn-bg, var(--tl-accent)); color: var(--bk-pagination-btn-text, var(--tl-ink));
+    transition: all .2s ease;
+  }
+  .tl__btn:hover { background: var(--bk-pagination-btn-hover-bg, var(--tl-ink)); color: var(--bk-pagination-btn-hover-text, var(--tl-paper)); }
+  .tl__page {
+    width: 2.5rem; height: 2.5rem; display: grid; place-items: center; font-weight: 700; font-size: .9rem;
+    color: var(--tl-muted); border: 2px solid var(--tl-line); text-decoration: none; transition: all .2s ease;
+  }
+  .tl__page:hover { border-color: var(--tl-ink); color: var(--tl-ink); }
+  .tl__page--active { background: var(--bk-pagination-active-bg, var(--tl-accent)); border-color: var(--bk-pagination-active-bg, var(--tl-accent)); color: var(--bk-pagination-active-text, var(--tl-ink)); }
+
+  /* Móvil: la fecha pasa a una franja sobre la tarjeta y se oculta la línea */
+  @media (max-width: 720px) {
+    .tl { padding: 4rem 1rem; }
+    .tl__list::before { display: none; }
+    .tl__item { grid-template-columns: 1fr; gap: .75rem; }
+    .tl__date { width: auto; justify-self: start; display: flex; align-items: baseline; gap: .6rem; padding: .5rem .9rem; box-shadow: none; }
+    .tl__day { font-size: 1.4rem; }
+    .tl__month, .tl__year { margin-top: 0; }
+    .tl__link { flex-direction: column; }
+    .tl__thumb { flex: none; aspect-ratio: 16 / 9; min-height: 0; }
+    .tl__body { padding: 1.25rem; }
+  }
+</style>

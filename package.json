@@ -11,9 +11,11 @@
     "preview": "astro preview",
     "astro": "astro",
     "build:prod": "cross-env SITE=https://landing.mequipo.com BASE=/ astro build",
-    "build:test": "cross-env SITE=https://landing.mequipo.com BASE=/landings/buildinginsulationpanels/ astro build"
+    "build:test": "cross-env SITE=https://landing.mequipo.com BASE=/landings/buildinginsulationpanels/ astro build",
+    "start": "node ./dist/server/entry.mjs"
   },
   "dependencies": {
+    "@astrojs/node": "^11.1.6",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.0.3",
     "astro-blog-kit": "^0.4.2",

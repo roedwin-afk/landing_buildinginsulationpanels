@@ -1,21 +1,52 @@
 ---
+export const prerender = false;
+
 import { BlogPost, Comments, CommentForm } from "astro-blog-kit/components";
-import { createWPClient, getStaticPathsForPosts } from "astro-blog-kit/utils";
+import { createWPClient } from "astro-blog-kit/utils";
 import { resolveHero, resolveUI } from 'astro-blog-kit';
 import config from "../../../blog.config";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getLang, useTranslations } from "../../i18n/utils";
 
-export async function getStaticPaths() {
-  const wp = createWPClient(config.wpUrl);
-  const posts = await wp.getAllPosts();
-  return getStaticPathsForPosts(posts);
+const slug = Astro.params.slug;
+
+// Sin slug o con subrutas (/blog/a/b) → 404
+if (!slug || slug.includes('/')) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
 }
 
-const { post } = Astro.props;
-
 const wp = createWPClient(config.wpUrl);
-const comments = post.id ? await wp.getComments(post.id) : [];
+
+let post: any = null;
+let wpError = false;
+
+try {
+  post = await wp.getPost(slug);
+} catch (err) {
+  // Distingue "post inexistente" de "WordPress caído"
+  try {
+    await wp.getPosts({ perPage: 1, page: 1 });
+  } catch {
+    console.error('[blog] Error consultando WordPress:', err);
+    wpError = true;
+  }
+}
+
+if (!post && !wpError) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+if (wpError) {
+  Astro.response.status = 503;
+}
+
+let comments: any[] = [];
+if (post?.id) {
+  try {
+    comments = await wp.getComments(post.id);
+  } catch (err) {
+    console.error('[blog] Error cargando comentarios:', err);
+  }
+}
 
 const locale = config.locale ?? 'en';
 const hero = resolveHero(config.hero, locale);
@@ -37,7 +68,15 @@ const t = useTranslations(lang);
 ---
 
 <BaseLayout t={t} lang={lang}>
-  <BlogPost post={post} t={bt} lang={config.locale ?? "en"} />
-  <Comments comments={comments} postId={post.id ?? 0} />
-  <CommentForm postId={post.id ?? 0} apiRoute="/api/comments" />
+  {wpError ? (
+    <section style="max-width:var(--bk-container-max);margin-inline:auto;padding:6rem 1rem;min-height:60vh">
+      <p>We couldn't load this article right now. Please try again later.</p>
+    </section>
+  ) : (
+    <>
+      <BlogPost post={post} t={bt} lang={config.locale ?? "en"} />
+      <Comments comments={comments} postId={post.id ?? 0} />
+      <CommentForm postId={post.id ?? 0} apiRoute="/api/comments" />
+    </>
+  )}
 </BaseLayout>

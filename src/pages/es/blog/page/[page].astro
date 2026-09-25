@@ -1,32 +1,60 @@
----
-import { BlogList } from "astro-blog-kit/components";
-import { createWPClient, getStaticPathsForPages } from "astro-blog-kit/utils";
+﻿---
+export const prerender = false;
+
+import BlogTimeline from '../../../../components/blog/BlogTimeline.astro';
+import { createWPClient } from "astro-blog-kit/utils";
 import { resolveHero, resolveUI } from 'astro-blog-kit';
-import { getLang, useTranslations } from "../../../../i18n/utils";
 import config from "../../../../../blog.config";
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { getLang, useTranslations } from "../../../../i18n/utils";
 
-export async function getStaticPaths() {
-  const wp = createWPClient(config.wpUrl);
-  const posts = await wp.getAllPosts();
-  return getStaticPathsForPages(posts, { postsPerPage: config.postsPerPage ?? 5 });
+const perPage = config.postsPerPage ?? 5;
+const currentPage = Number(Astro.params.page);
+
+// /blog/page/abc, /blog/page/0, /blog/page/1.5 → 404
+if (!Number.isInteger(currentPage) || currentPage < 1) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
 }
 
-const { posts, currentPage, totalPages } = Astro.props;
+const wp = createWPClient(config.wpUrl);
 
-const locale = config.locale ?? 'en';
-const hero = resolveHero(config.hero, locale);
-const ui = resolveUI(config.ui, locale);
+let posts: any[] = [];
+let totalPages = 0;
+let wpError = false;
+let outOfRange = false;
+
+try {
+  ({ posts, totalPages } = await wp.getPosts({ perPage, page: currentPage }));
+  outOfRange = posts.length === 0 || currentPage > totalPages;
+} catch (err) {
+  // WP responde 400 si la página no existe: se distingue de una caída real consultando la página 1
+  try {
+    await wp.getPosts({ perPage, page: 1 });
+    outOfRange = currentPage > 1;
+  } catch {
+    console.error('[blog] Error consultando WordPress:', err);
+    wpError = true;
+  }
+}
+
+if (outOfRange) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+if (wpError) {
+  Astro.response.status = 503;
+}
+
+const locale = 'es';
 
 const bt = {
   blog: {
-    tagline:     hero.tagline,
-    title_line1: hero.titleLine1,
-    title_line2: hero.titleLine2,
-    description: hero.description,
-    btncta:      ui.readMoreLabel,
-    btn_prev:    ui.btnPrev,
-    btn_next:    ui.btnNext,
+    tagline:     'Nuestro Blog',
+    title_line1: 'Últimos',
+    title_line2: 'Artículos',
+    description: 'Bienvenido a nuestro blog.',
+    btncta:      'Leer más',
+    btn_prev:    'Anterior',
+    btn_next:    'Siguiente',
   },
 };
 
@@ -36,15 +64,21 @@ const t = useTranslations(lang);
 ---
 
 <BaseLayout t={t} lang={lang}>
-  <BlogList
-    posts={posts}
-    currentPage={currentPage}
-    totalPages={totalPages}
-    basePath={`${base}blog/page/`}
-    blogBase={`${base}blog/`}
-    dateLocale={config.locale ?? "en"}
-    t={bt}
-    locale={config.locale ?? "en"}
-    layout={config.defaultLayout ?? "magazine"}
-  />
+  {wpError ? (
+    <section style="max-width:var(--bk-container-max);margin-inline:auto;padding:6rem 1rem;min-height:60vh">
+      <p>No pudimos cargar los artículos en este momento. Inténtalo de nuevo más tarde.</p>
+    </section>
+  ) : (
+    <BlogTimeline
+      posts={posts}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      basePath={`${base}es/blog/page/`}
+      blogBase={`${base}es/blog/`}
+      dateLocale={"es"}
+      t={bt}
+      locale={"es"}
+      layout={config.defaultLayout ?? "magazine"}
+    />
+  )}
 </BaseLayout>

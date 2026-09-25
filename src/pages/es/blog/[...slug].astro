@@ -1,35 +1,64 @@
----
+﻿---
+export const prerender = false;
+
 import { BlogPost, Comments, CommentForm } from "astro-blog-kit/components";
-import { createWPClient, getStaticPathsForPosts } from "astro-blog-kit/utils";
+import { createWPClient } from "astro-blog-kit/utils";
 import { resolveHero, resolveUI } from 'astro-blog-kit';
-import { getLang, useTranslations } from "../../../i18n/utils";
 import config from "../../../../blog.config";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getLang, useTranslations } from "../../../i18n/utils";
 
-export async function getStaticPaths() {
-  const wp = createWPClient(config.wpUrl);
-  const posts = await wp.getAllPosts();
-  return getStaticPathsForPosts(posts);
+const slug = Astro.params.slug;
+
+// Sin slug o con subrutas (/blog/a/b) → 404
+if (!slug || slug.includes('/')) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
 }
 
-const { post } = Astro.props;
-
 const wp = createWPClient(config.wpUrl);
-const comments = post.id ? await wp.getComments(post.id) : [];
 
-const locale = config.locale ?? 'en';
-const hero = resolveHero(config.hero, locale);
-const ui = resolveUI(config.ui, locale);
+let post: any = null;
+let wpError = false;
+
+try {
+  post = await wp.getPost(slug);
+} catch (err) {
+  // Distingue "post inexistente" de "WordPress caído"
+  try {
+    await wp.getPosts({ perPage: 1, page: 1 });
+  } catch {
+    console.error('[blog] Error consultando WordPress:', err);
+    wpError = true;
+  }
+}
+
+if (!post && !wpError) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+if (wpError) {
+  Astro.response.status = 503;
+}
+
+let comments: any[] = [];
+if (post?.id) {
+  try {
+    comments = await wp.getComments(post.id);
+  } catch (err) {
+    console.error('[blog] Error cargando comentarios:', err);
+  }
+}
+
+const locale = 'es';
 
 const bt = {
   blog: {
-    tagline:     hero.tagline,
-    title_line1: hero.titleLine1,
-    title_line2: hero.titleLine2,
-    description: hero.description,
-    btncta:      ui.readMoreLabel,
-    btn_prev:    ui.btnPrev,
-    btn_next:    ui.btnNext,
+    tagline:     'Nuestro Blog',
+    title_line1: 'Últimos',
+    title_line2: 'Artículos',
+    description: 'Bienvenido a nuestro blog.',
+    btncta:      'Leer más',
+    btn_prev:    'Anterior',
+    btn_next:    'Siguiente',
   },
 };
 const lang = getLang(Astro.url, import.meta.env.BASE_URL);
@@ -37,7 +66,15 @@ const t = useTranslations(lang);
 ---
 
 <BaseLayout t={t} lang={lang}>
-  <BlogPost post={post} t={bt} lang={config.locale ?? "en"} />
-  <Comments comments={comments} postId={post.id ?? 0} />
-  <CommentForm postId={post.id ?? 0} apiRoute="/api/comments" />
+  {wpError ? (
+    <section style="max-width:var(--bk-container-max);margin-inline:auto;padding:6rem 1rem;min-height:60vh">
+      <p>No pudimos cargar este artículo en este momento. Inténtalo de nuevo más tarde.</p>
+    </section>
+  ) : (
+    <>
+      <BlogPost post={post} t={bt} lang={"es"} />
+      <Comments comments={comments} postId={post.id ?? 0} />
+      <CommentForm postId={post.id ?? 0} apiRoute="/api/comments" />
+    </>
+  )}
 </BaseLayout>

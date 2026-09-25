@@ -1,5 +1,7 @@
----
-import { BlogList } from 'astro-blog-kit/components';
+﻿---
+export const prerender = false;
+
+import BlogTimeline from '../../components/blog/BlogTimeline.astro';
 import { getLang, useTranslations } from "../../i18n/utils";
 import { createWPClient } from 'astro-blog-kit/utils';
 import { resolveHero, resolveUI } from 'astro-blog-kit';
@@ -7,7 +9,18 @@ import config from '../../../blog.config';
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const wp = createWPClient(config.wpUrl);
-const { posts, totalPages } = await wp.getPosts({ perPage: config.postsPerPage ?? 5 });
+
+let posts: any[] = [];
+let totalPages = 0;
+let wpError = false;
+
+try {
+  ({ posts, totalPages } = await wp.getPosts({ perPage: config.postsPerPage ?? 5, page: 1 }));
+} catch (err) {
+  console.error('[blog] Error consultando WordPress:', err);
+  wpError = true;
+  Astro.response.status = 503;
+}
 
 const locale = config.locale ?? 'en';
 const hero = resolveHero(config.hero, locale);
@@ -31,15 +44,21 @@ const t = useTranslations(lang);
 ---
 
 <BaseLayout t={t} lang={lang}>
-  <BlogList
-    posts={posts}
-    currentPage={1}
-    totalPages={totalPages}
-    basePath={`${base}blog/page/`}
-    blogBase={`${base}blog/`}
-    dateLocale={locale}
-    t={bt}
-    locale={locale}
-    layout={config.defaultLayout ?? 'magazine'}
-  />
+  {wpError ? (
+    <section style="max-width:var(--bk-container-max);margin-inline:auto;padding:6rem 1rem;min-height:60vh">
+      <p>We couldn't load the articles right now. Please try again later.</p>
+    </section>
+  ) : (
+    <BlogTimeline
+      posts={posts}
+      currentPage={1}
+      totalPages={totalPages}
+      basePath={`${base}blog/page/`}
+      blogBase={`${base}blog/`}
+      dateLocale={locale}
+      t={bt}
+      locale={locale}
+      layout={config.defaultLayout ?? 'magazine'}
+    />
+  )}
 </BaseLayout>
